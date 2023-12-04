@@ -20,6 +20,10 @@ export interface Post {
   title: string;
   /** Optional summary of post content. */
   excerpt?: string;
+  
+  /** Added for thedissenter. */
+  youtubeid?: string;
+  
   /**  */
   image?: ImageMetadata | string;
 

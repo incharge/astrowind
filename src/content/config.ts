@@ -53,6 +53,7 @@ const postCollection = defineCollection({
 
     title: z.string(),
     excerpt: z.string().optional(),
+    youtubeid: z.string().optional(), /* Added for thedissenter */
     image: z.string().optional(),
 
     category: z.string().optional(),

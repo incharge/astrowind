@@ -49,6 +49,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     updateDate: rawUpdateDate,
     title,
     excerpt,
+    youtubeid,  /* Added for thedissenter */
     image,
     tags: rawTags = [],
     category: rawCategory,
@@ -73,6 +74,8 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
 
     title: title,
     excerpt: excerpt,
+    youtubeid: youtubeid, /* Added for thedissenter */
+
     image: image,
 
     category: category,
