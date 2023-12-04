@@ -19,7 +19,7 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-package-lock.json
+# package-lock.json - Commit this file because it is required by the `withastro` github action
 pnpm-lock.yaml
 
 .astro
