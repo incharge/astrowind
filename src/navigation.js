@@ -15,7 +15,7 @@ export const headerData = {
       href: getBlogPermalink(''),
     },
   ],
-  actions: [{ text: 'Support the podcast', href: '/support' }],
+  actions: [{ text: 'Support the podcast', href: getPermalink('/support') }],
 };
 
 export const footerData = {
