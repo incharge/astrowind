@@ -6,15 +6,18 @@ site:
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
 
+# Re-use robot index settings using yaml &anchor (here) and *alias (below)
+defaults: &robotsdefault
+    index  : false
+    follow : false
+
 # Default SEO metadata
 metadata:
   title:
     default: The Dissenter
     template: '%s — The Dissenter Podcast'
   description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
-  robots:
-    index: false
-    follow: false
+  robots: *robotsdefault
   # openGraph:
   #   site_name: AstroWind
   #   images:
@@ -39,20 +42,17 @@ apps:
     post:
       isEnabled: true
       permalink: '/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
-      robots:
-        index: true
+      robots: *robotsdefault
 
     list:
       isEnabled: true
       pathname: 'blog' # Blog main path, you can change this to "articles" (/articles)
-      robots:
-        index: true
+      robots: *robotsdefault
 
     category:
       isEnabled: true
       pathname: 'category' # Category main path /category/some-category, you can change this to "group" (/group/some-category)
-      robots:
-        index: true
+      robots: *robotsdefault
 
     tag:
       isEnabled: true
