@@ -1,3 +1,4 @@
+# Changes do not take effect until the astro server (npm run dev) is restarted 
 site:
   name: The Dissenter
   site: 'https://incharge.github.io/'
