@@ -52,7 +52,12 @@ page.url.next = getPermalink(page.url.next);
 */}
     <BlogList posts={page.data} />
     <PaginationAstrowind prevUrl={page.url.prev} nextUrl={page.url.next} />
-    <PaginationPhilNash page={page} urlPattern={getPermalink("/blog/{}")} />
+    <PaginationPhilNash
+      page={page}
+      urlPattern={getPermalink("/podcast/{}")} 
+      firstPageUrl={getPermalink("/podcast/")}
+    /> {/* firstPageUrl avoids trailing double slash */}
+
     <!--
       <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
       <PostTags tags={allTags}  title="Search by Tags:" />
