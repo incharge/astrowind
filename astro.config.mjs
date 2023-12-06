@@ -33,7 +33,7 @@ export default defineConfig({
   output: 'static',
   build: {
     format: "directory",
-  }
+  },
 
   integrations: [
     pagefind(),  /* PageFind site search */
