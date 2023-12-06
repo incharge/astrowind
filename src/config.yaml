@@ -17,7 +17,7 @@ metadata:
   title:
     default: The Dissenter
     template: '%s — The Dissenter Podcast'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+  description: "My name is Ricardo Lopes, and I'm from Portugal. Thank you for visiting my podcast. Over the past few years, I have conducted and released more than 800 interviews and talks with experts and academics from a variety of areas and disciplines, ranging from the Arts and Philosophy to the Social Sciences and Biology. You will certainly find a subject of your interest covered here. New interviews are released on Mondays, Thursdays, and Fridays."
   robots: *robotsdefault
   # openGraph:
   #   site_name: AstroWind
