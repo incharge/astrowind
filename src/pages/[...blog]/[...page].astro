@@ -1,5 +1,5 @@
 ---
-// Blog home page
+// Blog list page
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { getPermalink } from '../../utils/permalinks';
 
@@ -33,6 +33,7 @@ const metadata = {
     index: blogListRobots?.index && currentPage === 1,
     follow: blogListRobots?.follow,
   },
+  siteSearch: false, // inCharge: Exclude blog lists from site search
   openGraph: {
     type: 'blog',
   },
