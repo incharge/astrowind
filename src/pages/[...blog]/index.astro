@@ -1,4 +1,5 @@
 ---
+// Single post
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 
 import merge from 'lodash.merge';
@@ -43,6 +44,6 @@ const metadata = merge(
 ---
 
 <Layout metadata={metadata}>
-  <SinglePost post={{ ...post, image: image }} url={url} />
+    <SinglePost post={{ ...post, image: image }} url={url} />
   <ToBlogLink />
 </Layout>
