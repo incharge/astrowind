@@ -32,8 +32,8 @@ export default defineConfig({
 
   output: 'static',
   build: {
-    format: "file",
-  },  /* PageFind site search */
+    format: "directory",
+  }
 
   integrations: [
     pagefind(),  /* PageFind site search */
