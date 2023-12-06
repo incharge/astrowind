@@ -10,6 +10,7 @@ import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
 import icon from 'astro-icon';
 import tasks from './src/utils/tasks';
+import pagefind from "astro-pagefind"; /* PageFind site search */
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter.mjs';
 
@@ -30,8 +31,12 @@ export default defineConfig({
   trailingSlash: SITE.trailingSlash ? 'always' : 'never',
 
   output: 'static',
+  build: {
+    format: "file",
+  },  /* PageFind site search */
 
   integrations: [
+    pagefind(),  /* PageFind site search */
     tailwind({
       applyBaseStyles: false,
     }),

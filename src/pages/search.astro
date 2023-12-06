@@ -1,0 +1,16 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import SearchBox from "astro-pagefind/components/Search";
+const metadata = {
+  title: 'Search',
+};
+---
+<Layout metadata={metadata}>
+    <section class="flex items-center h-full p-16">
+        <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+            <div class="max-w-md text-center">
+                <SearchBox id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
+            </div>
+        </div>
+    </section>
+</Layout>

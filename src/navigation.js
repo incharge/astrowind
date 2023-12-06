@@ -14,6 +14,10 @@ export const headerData = {
       text: 'Episodes',
       href: getBlogPermalink(''),
     },
+    {
+      text: 'Search',
+      href: getPermalink('/search'),
+    },
   ],
   actions: [{ text: 'Support the podcast', href: getPermalink('/support') }],
 };

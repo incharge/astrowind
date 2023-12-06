@@ -3,7 +3,7 @@ site:
   name: The Dissenter
   site: 'https://incharge.github.io/'
   base: '/thedissenter'
-  trailingSlash: false
+  trailingSlash: true
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
 
