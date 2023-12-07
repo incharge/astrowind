@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import { listenData } from '~/navigation';
+const images = import.meta.glob("../../assets/images/listen/*");
+const height = 64;
+
+---
+{listenData.map((listen) => 
+  images[`../../assets/images/listen/${listen.image}.svg`] ? (
+    <div class="inline-block pr-3">
+      <a href={listen.url} title={(listen.action || 'Listen') + ' on ' + listen.text}>
+        <Image
+          src={images[`../../assets/images/listen/${listen.image}.svg`]()}
+          width={height * (listen.ratio ? listen.ratio : 1) }
+          height={height}
+          alt={listen.text}
+        />
+      </a>
+    </div>
+  ) : (
+    <div class="inline-block">
+      <a href={listen.url} title={'Listen on ' + listen.text}>
+        {listen.text}
+      </a>
+    </div>
+  )
+)}
