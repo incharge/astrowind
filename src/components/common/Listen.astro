@@ -5,9 +5,11 @@ const images = import.meta.glob("../../assets/images/listen/*");
 const height = 64;
 
 ---
+<div class="overflow-x-auto">
+  <ul class="float-right flex flex-row">
 {listenData.map((listen) => 
   images[`../../assets/images/listen/${listen.image}.svg`] ? (
-    <div class="inline-block pr-3">
+    <li class="pr-3">
       <a href={listen.url} title={(listen.action || 'Listen') + ' on ' + listen.text}>
         <Image
           src={images[`../../assets/images/listen/${listen.image}.svg`]()}
@@ -16,12 +18,14 @@ const height = 64;
           alt={listen.text}
         />
       </a>
-    </div>
+    </li>
   ) : (
-    <div class="inline-block">
+  <div class="inline-block">
       <a href={listen.url} title={'Listen on ' + listen.text}>
         {listen.text}
       </a>
     </div>
   )
 )}
+  </ul>
+</div>
