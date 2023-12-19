@@ -1,4 +1,6 @@
 ---
+import { YouTube } from '@astro-community/astro-embed-youtube';
+
 import type { ImageMetadata } from 'astro';
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
@@ -23,7 +25,11 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
 
 <article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
   {
-    image && (
+    post.youtubeid && (
+      <div>
+          <YouTube id={post.youtubeid} />
+      </div>
+    ) || image && (
       <a class="relative block group" href={link ?? 'javascript:void(0)'}>
         <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
           {image && (
