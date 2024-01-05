@@ -25,6 +25,8 @@ const whenExternalScripts = (items = []) =>
       : [items()]
     : [];
 
+// See https://astro.build/config
+// Much of this is read from ./src/config.yaml
 export default defineConfig({
   site: SITE.site,
   base: SITE.base,
