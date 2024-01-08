@@ -6,12 +6,13 @@ const height = 64;
 
 ---
 <div class="overflow-x-auto">
-  <ul class="float-right flex flex-row">
-{listenData.map((listen) => 
+  <ul class="flex flex-row list-none p-0">
+{listenData.map((listen) =>
   images[`../../assets/images/listen/${listen.image}.svg`] ? (
-    <li class="pr-3">
+    <li class="p-0 m-0 pr-3">
       <a href={listen.url} title={(listen.action || 'Listen') + ' on ' + listen.text}>
         <Image
+          class="m-0"
           src={images[`../../assets/images/listen/${listen.image}.svg`]()}
           width={height * (listen.ratio ? listen.ratio : 1) }
           height={height}

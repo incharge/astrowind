@@ -7,12 +7,8 @@ export const headerData = {
       href: getPermalink('/'),
     },
     {
-      text: 'About',
-      href: getPermalink('/about'),
-    },
-    {
-      text: 'Testimonials',
-      href: getPermalink('/testimonials'),
+      text: 'Subscribe',
+      href: getPermalink('/subscribe'),
     },
     {
       text: 'Episodes',
