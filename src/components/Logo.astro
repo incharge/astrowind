@@ -1,7 +1,19 @@
 ---
 import { SITE } from '~/utils/config';
+import Image from '~/components/common/Image.astro';
+import { findImage } from '~/utils/images';
+const image = (await findImage('~/assets/images/logo.png'));
 ---
 
 <span class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white">
-  {SITE?.name}
+  {
+    image && (
+        <Image
+          src={image}
+          alt={SITE?.name}
+          loading="lazy"
+          decoding="async"
+        />
+    )
+  }
 </span>
