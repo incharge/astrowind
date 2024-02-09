@@ -7,8 +7,8 @@ import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
 //import Headline from '~/components/blog/Headline.astro';
 
-import PaginationAstrowind from '~/components/blog/Pagination.astro';
-import PaginationPhilNash from "@philnash/astro-pagination";
+{/* import PaginationAstrowind from '~/components/blog/Pagination.astro'; */}
+import PaginationPhilNash from "@philnash/astro-pagination"; {/* See node_modules/@philnash/astro-pagination */}
 // import PostTags from "~/components/blog/Tags.astro";
 
 import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
@@ -52,12 +52,12 @@ page.url.next = getPermalink(page.url.next);
     </Headline>
 */}
     <BlogList posts={page.data} />
-    <PaginationAstrowind prevUrl={page.url.prev} nextUrl={page.url.next} />
-    <PaginationPhilNash
+    {/* <PaginationAstrowind prevUrl={page.url.prev} nextUrl={page.url.next} /> */}
+    <div class="pagination"><PaginationPhilNash
       page={page}
       urlPattern={getPermalink("/podcast/{}")} 
       firstPageUrl={getPermalink("/podcast/")}
-    /> {/* firstPageUrl avoids trailing double slash */}
+    /><div> {/* firstPageUrl avoids trailing double slash */}
 
     <!--
       <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
