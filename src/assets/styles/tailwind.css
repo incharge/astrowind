@@ -92,3 +92,5 @@
 
 .pagination ul { @apply flex; }
 .pagination a, .pagination em { @apply px-1 mx-1 }
+
+lite-youtube::before { display: none !important; }
