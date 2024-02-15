@@ -285,3 +285,12 @@ export interface Content extends Headline, Widget {
 }
 
 export interface Contact extends Headline, Form, Widget {}
+
+interface Appraisal extends Widget {
+  title?: string;
+  items: Array<{
+      name?: string;
+      image?: string;
+      text?: string;
+  }>;
+}

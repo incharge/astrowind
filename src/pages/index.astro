@@ -1,16 +1,8 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import Appraisal from '~/components/widgets/Appraisal.astro';
 
 const metadata = {
   title: 'The Dissenter',
@@ -25,5 +17,70 @@ const metadata = {
                   Over the past few years, I have conducted and released more than 800 interviews and talks with experts and academics from a variety of areas and disciplines, ranging from the Arts and Philosophy to the Social Sciences and Biology.
                   You will certainly find a subject of your interest covered here. New interviews are released on Mondays, Thursdays, and Fridays.
                 `}
+  />
+  <Appraisal
+    title="Appraisals"
+    items={[
+      {
+        name: "Diane Halpern, Dean Emerita of Social Sciences at Minerva Schools at Keck Graduate Institute",
+        image: "~/assets/images/appraisal/Diane-Halpern.jpg",
+        text: "Ricardo Lopes provides a valuable service for people who want quality reporting about contemporary issues. He is a professional journalist in every sense of that word. His questions were well thought out and his ability to guide the interview was terrific. He produces high quality materials that are much needed in this era of fake news and lies.",
+      },
+      {
+        name: "Randolph Nesse, Foundation Professor of Life Sciences and Founding Director in The Center for Evolution and Medicine at Arizona State University",
+        image: "~/assets/images/appraisal/Randolph-Nesse.jpg",
+        text: "Ricardo is a wonderful interviewer who takes conversations to the interesting edges, to the benefit of all concerned.",
+      },
+      {
+        name: "Nancy Segal, Professor of Developmental Psychology at California State University, Fullerton",
+        image: "~/assets/images/appraisal/Nancy-Segal.jpg",
+        text: "My experience on The Dissenter with Ricardo Lopes was superb! He is informed and articulate, and asked so many good questions. I would be happy to appear on his program again.",
+      },
+      {
+        name: "James Flynn, Emeritus Professor of Political Studies at the University of Otago, Dunedin, New Zealand",
+        image: "~/assets/images/appraisal/James-Flynn.jpeg",
+        text: "My interview with Ricardo Lopes was carefully planned to introduce the public to the fundamentals of what IQ is all about, and to allow me to state my own views without any ‘interviewer bias’, something which is most welcome.",
+      },
+      {
+        name: "Rebecca Newberger Goldstein, Philosopher, Author of Plato at the Googleplex, recipient of the National Humanities Medal",
+        image: "~/assets/images/appraisal/Rebecca-Newberger-Goldstein.jpg",
+        text: "I was very impressed with Ricardo’s penetrating style of conversation. It was more a conversation--an engaging, spontaneous, and free-ranging conversation--than a standard interview, and only the most well-prepared of questioners can bring this off so naturally. His expertise was all the more impressive considering that, in order to interview me, he was stepping out of his normal intellectual terrain—science—and into philosophy.",
+      },
+      {
+        name: "Patricia Churchland, UC President's Professor of Philosophy Emerita at the University of California, San Diego (UCSD), Fellow of the American Academy of Arts & Sciences",
+        image: "~/assets/images/appraisal/Patricia-Churchland.jpg",
+        text: "Ricardo Lopes is an outstanding interviewer — super-well prepared, logically organized, a good sense of the audience and what will be interesting, and how to avoid confusing technical jargon. He also has a reassuring and charming manner. Altogether, 10/10.",
+      },
+      {
+        name: "Phoebe C. Ellsworth, Frank Murphy Distinguished Professor of Law and Psychology at the University of Michigan",
+        image: "~/assets/images/appraisal/Phoebe-Ellsworth.jpg",
+        text: "My interview with The Dissenter was extremely well-researched and well organized. The questions were comprehensive and very intelligent, zeroing in on the important issues in research on emotions. I felt as though I was having a stimulating discussion with a scientific colleague. I am impressed that Ricardo can manage to achieve this level of informed preparation on such a wide variety of topics.",
+      },
+      {
+        name: "Jennifer Vonk, Professor of Comparative/Cognitive Psychology at Oakland University",
+        image: "~/assets/images/appraisal/Jennifer-Vonk.png",
+        text: "The breadth and depth of Ricardo's knowledge goes far beyond the average science writer or interviewer. He is highly skilled at getting to the heart of overarching research questions and has a great facility for translating complex concepts into an accessible forum for a broad audience. His interviewing style is simultaneously warm, engaging, thoughtful, probing, and challenging, which makes for great conversations!",
+      },
+      {
+        name: "Joseph LeDoux, Professor of Neuroscience, NYU. Author of The Deep History of Ourselves",
+        image: "~/assets/images/appraisal/Joseph-LeDoux.jpg",
+        text: "Ricardo Lopes is a wonderful interviewer. He was well-prepared with interesting questions, and let me take my time in answering them. I enjoyed our brief time together very much.",
+      },
+      {
+        name: "Dan Sperber, professor in cognitive science and philosophy at the Central European University",
+        image: "~/assets/images/appraisal/Dan-Sperber.jpg",
+        text: "Ricardo Lopes' podcast is outstanding. He has both the competence and the talent to make his guests talk simply and relevantly on their work.",
+      },
+      {
+        name: "Richard Shweder, Harold H. Swift Distinguished Service Professor of Human Development at the University of Chicago",
+        image: "~/assets/images/appraisal/Richard-Shweder.jpg",
+        text: "Ricardo Lopes’ form of dissent is his opposition to vacuous, disjointed, evasive or mindless interviews.   He is a journalist-intellectual who comes fully prepared to his interviews, conversant in the relevant literature, aware of the central points of controversy and systematic in his deep and pointed questioning.   The result is the production of very substantive conversations - monuments of a sort to the life of the mind.",
+      },
+      {
+        name: "H. Clark Barrett, Professor of Anthropology at the University of California, Los Angeles",
+        image: "~/assets/images/appraisal/H-Clark-Barrett.jpg",
+        text: "Ricardo is an outstanding interviewer. His questions are insightful and show a deep engagement with the pressing questions of the moment in a broad range of fields. I've rarely had a chance to cover such a range of topics in a single conversation--a truly enjoyable experience, and an honor to be among his impressive list of guests!",
+      },      
+    ]}
   />
 </Layout>

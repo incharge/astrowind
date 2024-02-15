@@ -1,0 +1,30 @@
+---
+import WidgetWrapper from "~/components/ui/WidgetWrapper.astro";
+import type { Appraisal } from "~/types";
+
+const {
+  title = await Astro.slots.render('title'),
+  items = []
+} = Astro.props as Appraisal;
+
+---
+<WidgetWrapper>
+    {title && (
+        <div class="md:max-w-sm">
+          <h2
+            class="text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2"
+            set:html={title}
+          />
+        </div>
+    )}
+    <div class="grid gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-4 -mb-6">
+    {items && items.map(({ name, image, text }) => (
+        <div class="mb-6">
+            <div class="p-6 rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900">
+                <blockquote class="text-muted dark:text-slate-400">&ldquo;{text}&rdquo;</q>
+                <span class="text-sm font-bold">{name}</span >
+            </div>
+        </div>
+    ))}
+    </div>
+</WidgetWrapper>
