@@ -24,8 +24,9 @@ export const headerData = {
 
 export const footerData = {
   socialLinks: [
-    { text: 'Terms', href: getPermalink('/terms') },
-    { text: 'Privacy Policy', href: getPermalink('/privacy') },
+    { text: 'Email', href: "mailto:dissenteryt@gmail.com", icon: "tabler:mail" },
+    { text: 'Twitter', href: "https://twitter.com/TheDissenterYT", icon: "tabler:brand-x" },
+    { text: 'Facebook', href: "https://www.facebook.com/thedissenteryt/", icon: "tabler:brand-facebook" },
   ],
   footNote: `
     Copyright Ricardo Lopes · All rights reserved.
