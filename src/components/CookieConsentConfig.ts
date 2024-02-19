@@ -41,7 +41,7 @@ export const config: CookieConsentConfig = {
             'This web site uses a cookie to collect and store data about how visitors use the website. This data is anonymous and agregated. You may accept or reject data collection',
           acceptAllBtn: 'Accept',
           acceptNecessaryBtn: 'Reject',
-          footer: '<a href="/thedissenter/cookies/">Cookie Policy</a>'
+          footer: '<a href="/cookies/">Cookie Policy</a>'
         },
         preferencesModal: { sections: [], },
       },

@@ -1,8 +1,8 @@
 # Changes do not take effect until the astro server (npm run dev) is restarted 
 site:
   name: The Dissenter
-  site: 'https://incharge.github.io/'
-  base: '/thedissenter'
+  site: 'https://www.thedissenter.net/'
+  base: '/'
   trailingSlash: true
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
