@@ -5,7 +5,7 @@ site:
   base: '/'
   trailingSlash: true
 
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+  googleSiteVerificationId: null
 
 # Re-use robot index settings using yaml &anchor (here) and *alias (below)
 defaults: &robotsdefault
@@ -64,7 +64,8 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: null # or "G-XXXXXXXXXX"
+      id: "G-FVW89X23D4" # or null
+      partytown: false
 
 ui:
   theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
