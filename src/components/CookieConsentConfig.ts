@@ -17,8 +17,9 @@ export const config: CookieConsentConfig = {
     necessary: {
       readOnly: true,
     },
-    functionality: {},
-    analytics: {},
+    analytics: {
+        enabled: true,
+    }
   },
   language: {
     default: 'en',
@@ -33,6 +34,7 @@ export const config: CookieConsentConfig = {
           showPreferencesBtn: 'Manage preferences',
           footer:
           '<a href="/cookies/">Cookie Policy</a>',
+          closeIconLabel: 'x',
         },
         preferencesModal: {
           title: 'Consent Preferences Center',

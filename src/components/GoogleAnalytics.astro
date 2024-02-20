@@ -12,7 +12,7 @@ const { id = "GA_MEASUREMENT_ID", partytown = false, vanillacookieconsent = true
 
 const attrs = merge(
         partytown ? { type: "text/partytown" } : {},
-        vanillacookieconsent ? { "data-category": "analytics", "data-service": "Google Analytics" } : {}
+        vanillacookieconsent ? { type: "text/plain", "data-category": "analytics" } : {}
     )
 ---
 
