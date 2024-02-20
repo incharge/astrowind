@@ -66,6 +66,7 @@ analytics:
     googleAnalytics:
       id: "G-FVW89X23D4" # or null
       partytown: false
+      vanillacookieconsent: true
 
 ui:
   theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"

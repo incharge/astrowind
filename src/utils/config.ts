@@ -63,6 +63,7 @@ export interface AnalyticsConfig {
     googleAnalytics: {
       id?: string;
       partytown?: boolean;
+      vanillacookieconsent?: boolean;
     };
   };
 }
@@ -189,6 +190,7 @@ const getAnalytics = () => {
       googleAnalytics: {
         id: undefined,
         partytown: true,
+        vanillacookieconsent: false,
       },
     },
   };

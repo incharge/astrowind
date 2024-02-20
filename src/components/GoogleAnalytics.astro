@@ -1,0 +1,28 @@
+---
+// This component is adapted from @astrolib/analytics (https://github.com/onwidget/astrolib)
+// to add support for vanillacookieconsent https://www.npmjs.com/package/vanilla-cookieconsent
+import merge from 'lodash.merge';
+export interface Props {
+  id: string;
+  partytown?: boolean;
+  vanillacookieconsent?: boolean;
+}
+
+const { id = "GA_MEASUREMENT_ID", partytown = false, vanillacookieconsent = true } = Astro.props;
+
+const attrs = merge(
+        partytown ? { type: "text/partytown" } : {},
+        vanillacookieconsent ? { "data-category": "analytics", "data-service": "Google Analytics" } : {}
+    )
+---
+
+<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} {...attrs}></script>
+
+<script is:inline define:vars={{ id }} {...attrs}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", id);
+</script>
