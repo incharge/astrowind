@@ -19,13 +19,13 @@ metadata:
     template: '%s — The Dissenter Podcast'
   description: "My name is Ricardo Lopes, and I'm from Portugal. Thank you for visiting my podcast. Over the past few years, I have conducted and released more than 800 interviews and talks with experts and academics from a variety of areas and disciplines, ranging from the Arts and Philosophy to the Social Sciences and Biology. You will certainly find a subject of your interest covered here. New interviews are released on Mondays, Thursdays, and Fridays."
   robots: *robotsdefault
-  # openGraph:
-  #   site_name: AstroWind
-  #   images:
-  #     - url: '~/assets/images/default.png'
-  #       width: 1200
-  #       height: 628
-  #   type: website
+  openGraph:
+    site_name: The Dissenter
+    images:
+      - url: '~/assets/images/thedissenter-opengraph-1200x630.jpg'
+        width: 1200
+        height: 630
+    type: website
   # twitter:
   #   handle: '@onwidget'
   #   site: '@onwidget'
