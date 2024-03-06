@@ -94,3 +94,9 @@
 .pagination a, .pagination em { @apply px-1 mx-1 }
 
 lite-youtube::before { display: none !important; }
+.timelink {
+    @apply cursor-pointer pl-1 text-gray-800 bg-gray-200 hover:bg-gray-100 border border-gray-400 rounded shadow;
+}
+.timelink:after {
+  content: "\25B8";
+}

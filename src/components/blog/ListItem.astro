@@ -27,7 +27,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
   {
     post.youtubeid && (
       <div>
-          <YouTube id={post.youtubeid} />
+          <YouTube id={post.youtubeid} js-api />
       </div>
     ) || image && (
       <a class="relative block group" href={link ?? 'javascript:void(0)'}>
