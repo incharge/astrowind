@@ -76,7 +76,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
       </div>
     </div>
     <nav
-      class="items-center w-full md:w-auto hidden md:flex text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:mx-5"
+      class="items-center w-full md:w-auto hidden md:flex text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:mx-5 bg-[#d0b0b0] md:bg-transparent"
       aria-label="Main navigation"
     >
       <ul
@@ -125,10 +125,11 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
     <div
       class:list={[
         { "ml-auto rtl:ml-0 rtl:mr-auto": position === "left" },
-        "hidden md:self-center flex md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0",
+        "hidden md:self-center flex md:flex items-center md:mb-0 relative w-full md:w-auto md:static justify-end rtl:left-auto rtl:right-0 p-3 md:p-0",
       ]}
     >
       <div class="items-center flex justify-between w-full md:w-auto">
+{/*
         <div class="flex">
           {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />}
           {
@@ -143,11 +144,12 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
             )
           }
         </div>
+*/}
         {
           actions?.length ? (
-            <span class="ml-4 rtl:ml-0 rtl:mr-4">
+            <span class="md:ml-4 rtl:ml-0 rtl:mr-4">
               {actions.map((btnProps) => (
-                <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto"/>
+                <Button {...btnProps} class="md:ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto"/>
               ))}
             </span>
           ) : (
