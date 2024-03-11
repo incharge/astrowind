@@ -91,7 +91,14 @@ const getSite = () => {
     googleSiteVerificationId: '',
   };
 
-  return merge({}, _default, config?.site ?? {}) as SiteConfig;
+  // inCharge: in dev mode, set the site and base URL from environment variables
+  const devSiteConfig =
+    import.meta.env.DEV ? {
+      site: import.meta.env.VITE_SITE,
+      base: import.meta.env.VITE_BASE
+    } as SiteConfig : {};
+  
+  return merge({}, _default, (config?.site ?? {}), devSiteConfig) as SiteConfig;
 };
 
 const getMetadata = () => {
@@ -112,7 +119,16 @@ const getMetadata = () => {
     },
   };
 
-  return merge({}, _default, config?.metadata ?? {}) as MetaDataConfig;
+  // inCharge: in dev mode, tell robots not to index the site
+  const devMetadata =
+    import.meta.env.DEV ? {
+      robots: {
+        index: false,
+        follow: false  
+      }
+    } as MetaDataConfig : {};
+
+  return merge({}, _default, config?.metadata ?? {}, devMetadata) as MetaDataConfig;
 };
 
 const getI18N = () => {
@@ -171,7 +187,37 @@ const getAppBlog = () => {
     },
   };
 
-  return merge({}, _default, config?.apps?.blog ?? {}) as AppBlogConfig;
+  // inCharge: in dev mode, tell robots not to index the blog
+  const devAppBlogConfig = import.meta.env.DEV ?
+  {
+    post: {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    },
+    list: {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    },
+    category: {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    },
+    tag: {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    },
+  } as AppBlogConfig
+  : {};
+
+  return merge({}, _default, config?.apps?.blog ?? {}, {}) as AppBlogConfig;
 };
 
 const getUI = () => {
