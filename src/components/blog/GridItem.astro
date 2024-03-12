@@ -3,6 +3,7 @@ import { APP_BLOG } from '~/utils/config';
 import type { Post } from '~/types';
 
 import Image from '~/components/common/Image.astro';
+import { YouTube } from '@astro-community/astro-embed-youtube';
 
 import { findImage } from '~/utils/images';
 import { getPermalink } from '~/utils/permalinks';
@@ -17,9 +18,13 @@ const image = (await findImage(post.image));
 ---
 
 <article class="mb-6 transition">
-  <div class="relative bg-gray-400 dark:bg-slate-700 rounded shadow-lg mb-6">
     {
-      image && (
+      post.youtubeid && (
+      <div>
+          <YouTube id={post.youtubeid} js-api />
+      </div>
+    ) || image && (
+    <div class="relative bg-gray-400 dark:bg-slate-700 rounded shadow-lg mb-6">
         <a href={getPermalink(post.permalink, 'post')}>
           <Image
             src={image}
@@ -34,9 +39,9 @@ const image = (await findImage(post.image));
             decoding="async"
           />
         </a>
+      </div>
       )
     }
-  </div>
   <h3 class="mb-2 text-xl font-bold leading-tight sm:text-2xl font-heading">
     {
       !APP_BLOG?.post?.isEnabled ? (
