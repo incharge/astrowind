@@ -58,6 +58,19 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
   {...id ? { id } : {}}
 >
   <div class="absolute inset-0"></div>
+  { import.meta.env.DEV ? (
+    <div
+      class:list={[
+        "flex text-muted text-xs px-2 md:px-6 mx-auto w-full bg-gray-200",
+        {
+          "max-w-7xl": !isFullWidth,
+        },
+      ]}
+    >
+      {import.meta.env.MODE} mode
+    </div>
+    ) : null
+  }  
   <div
     class:list={[
       "relative text-default md:px-6 mx-auto w-full md:flex md:justify-between\
