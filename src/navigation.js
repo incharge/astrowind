@@ -15,7 +15,7 @@ export const headerData = {
       href: getBlogPermalink(''),
     },
     {
-      text: 'Search',
+      text: '\u2315 Search',
       href: getPermalink('/search'),
     },
   ],
