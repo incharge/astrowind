@@ -5,11 +5,13 @@
 // See MultiPlayer.astro
 import 'video.js/dist/video-js.min.css';
 import 'lite-youtube-embed/src/lite-yt-embed.css';
+// To import without processing:
+// <script is:inline src={import.meta.env.BASE_URL + "video.js"}></script>
+// TODO: How to import directly from the node module?
+// <script>import 'video.js/dist/video.js';</script>
 ---
-<script>
-	import 'lite-youtube-embed';
-	import 'video.js/dist/video.min.js';
-</script>
+<script>import 'lite-youtube-embed';</script>
+<script src="../../assets/video.js"></script>
 <script is:inline>
 function multiplayerInit() {
     let el = document.getElementById("multiplayerav");
@@ -69,7 +71,7 @@ async function switchplayer(container, isVideo)
 
 async function addYoutube(container, autoplay = false, offset = 0)
 {
-    //console.log("addYoutube")
+    // console.log("add Youtube to " + container.id)
     ytElement = document.createElement("lite-youtube");
     let attribute = container.getAttribute("data-youtubeid");
     ytElement.setAttribute("id", "lite-youtube-" + container.id);
