@@ -5,13 +5,15 @@
 // See MultiPlayer.astro
 import 'video.js/dist/video-js.min.css';
 import 'lite-youtube-embed/src/lite-yt-embed.css';
-// To import without processing:
-// <script is:inline src={import.meta.env.BASE_URL + "video.js"}></script>
+// To import WITH processing:
+// <script src="../../assets/video.js"></script>
 // TODO: How to import directly from the node module?
 // <script>import 'video.js/dist/video.js';</script>
+// To import WITHOUT processing from :
+// <script is:inline src={import.meta.env.BASE_URL + "video.js"}></script>
 ---
 <script>import 'lite-youtube-embed';</script>
-<script src="../../assets/video.js"></script>
+<script is:inline src={import.meta.env.BASE_URL + "video.min.js"}></script>
 <script is:inline>
 function multiplayerInit() {
     let el = document.getElementById("multiplayerav");
@@ -73,8 +75,8 @@ async function addYoutube(container, autoplay = false, offset = 0)
 {
     // console.log("add Youtube to " + container.id)
     ytElement = document.createElement("lite-youtube");
+    ytElement.setAttribute("class", container.getAttribute("class").replace("/ ?multiplayer", ""));
     let attribute = container.getAttribute("data-youtubeid");
-    ytElement.setAttribute("id", "lite-youtube-" + container.id);
     ytElement.setAttribute("videoid", attribute);
     ytElement.setAttribute("js-api", "true");
     ytElement = container.appendChild(ytElement);
@@ -96,7 +98,6 @@ function addVideojs(container, autoplay = false, offset = 0)
 {
     //console.log("addVideojs")
     vjElement = document.createElement("video-js");
-    vjElement.setAttribute("id", "video-js-" + container.id);
     vjElement.setAttribute("controls", true);
     vjElement.setAttribute("fluid", true);
     let source = document.createElement('source');
