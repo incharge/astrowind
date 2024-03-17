@@ -1,0 +1,24 @@
+---
+// A player for audio & video that allows switching media while playing
+// Uses VideoJs for audio...
+// https://docs.videojs.com/player
+// https://videojs.com/guides/options/
+// https://www.npmjs.com/package/video.js/v/7.0.3
+// ...and lite-youtube for YouTube
+// https://github.com/paulirish/lite-youtube-embed/
+// https://developers.google.com/youtube/iframe_api_reference#Playback_status
+// Demos https://paulirish.github.io/lite-youtube-embed/
+// Demo using js-api https://paulirish.github.io/lite-youtube-embed/variants/js-api.html
+// https://www.npmjs.com/package/lite-youtube-embed
+// No longer using: https://www.npmjs.com/package/@astro-community/astro-embed-youtube
+
+export interface Props extends astroHTML.JSX.HTMLAttributes {
+	youtubeid?: string;
+	audiourl?: string;
+	poster?: string;
+}
+
+const { youtubeid, audiourl, poster, ...attrs } = Astro.props as Props;
+attrs["class"] += " multiplayer";
+---
+<div {...attrs} data-youtubeid={youtubeid} data-audiourl={audiourl} data-poster={poster}></div>

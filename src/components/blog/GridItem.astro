@@ -7,6 +7,7 @@ import { YouTube } from '@astro-community/astro-embed-youtube';
 
 import { findImage } from '~/utils/images';
 import { getPermalink } from '~/utils/permalinks';
+import MultiPlayer from '~/components/multiplayer/MultiPlayer.astro';
 
 
 export interface Props {
@@ -15,33 +16,11 @@ export interface Props {
 
 const { post } = Astro.props;
 const image = (await findImage(post.image));
+const id="multiplayer-" + post.id;
 ---
 
 <article class="mb-6 transition">
-    {
-      post.youtubeid && (
-      <div>
-          <YouTube id={post.youtubeid} js-api />
-      </div>
-    ) || image && (
-    <div class="relative bg-gray-400 dark:bg-slate-700 rounded shadow-lg mb-6">
-        <a href={getPermalink(post.permalink, 'post')}>
-          <Image
-            src={image}
-            class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            width={400}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post.title}
-            aspectRatio="16:9"
-            layout="cover"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
-      </div>
-      )
-    }
+  <MultiPlayer id={id} youtubeid={post.youtubeid} audiourl={post.audiourl} poster={post.image}/>
   <h3 class="mb-2 text-xl font-bold leading-tight sm:text-2xl font-heading">
     {
       !APP_BLOG?.post?.isEnabled ? (

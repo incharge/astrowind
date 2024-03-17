@@ -21,8 +21,9 @@ export interface Post {
   /** Optional summary of post content. */
   excerpt?: string;
   
-  /** Added for thedissenter. */
+  /** Added by inCharge */
   youtubeid?: string;
+  audiourl?: string;
   
   /**  */
   image?: ImageMetadata | string;

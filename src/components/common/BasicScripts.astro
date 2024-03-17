@@ -3,10 +3,7 @@ import { UI } from '~/utils/config';
 ---
 
 <script is:inline define:vars={{ defaultTheme: UI.theme }}>
-  async function seekTo(seconds) {
-    let player = await document.querySelector('lite-youtube').getYTPlayer();
-    player?.seekTo(seconds, true);
-  }
+
   function applyTheme(theme) {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -36,17 +33,9 @@ import { UI } from '~/utils/config';
   }
 
   window.onload = function () {
+    multiplayerInit();
     let lastKnownScrollPosition = window.scrollY;
     let ticking = true;
-
-    let timelinks = document.querySelectorAll('.timelinks time');
-    attachEvent(timelinks, 'click', function (ev, el) {
-      let ta = el.innerHTML.split(':');
-      let ts = 0;
-      ta.forEach(t => ts = ts * 60 + Number(t));
-      seekTo(ts)
-    });
-    timelinks.forEach(div => { div.classList.add("timelink"); });
 
     attachEvent('#header nav', 'click', function () {
       document.querySelector("[data-aw-toggle-menu]")?.classList.remove("expanded");

@@ -14,6 +14,7 @@ import SiteVerification  from "~/components/common/SiteVerification.astro"
 import Analytics  from "~/components/common/Analytics.astro"
 import BasicScripts from '~/components/common/BasicScripts.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import MultiplayerHeader from '../components/multiplayer/MultiPlayerHeader.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
 
@@ -38,6 +39,7 @@ const { language, textDirection } = I18N;
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
+    <MultiplayerHeader />
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight">

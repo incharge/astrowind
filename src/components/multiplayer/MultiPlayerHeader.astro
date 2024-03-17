@@ -1,0 +1,160 @@
+---
+// JavaScript for MultiPlayer.
+// Include this in the page header.
+// Call multiplayerInit() in the page onload
+// See MultiPlayer.astro
+import 'video.js/dist/video-js.min.css';
+import 'lite-youtube-embed/src/lite-yt-embed.css';
+---
+<script>
+	import 'lite-youtube-embed';
+	import 'video.js/dist/video.min.js';
+</script>
+<script is:inline>
+function multiplayerInit() {
+    let el = document.getElementById("multiplayerav");
+    if (el)
+        el.addEventListener("click", function(ev){multiplayerSwitch(ev.target.checked);});
+
+    let players = document.querySelectorAll('.multiplayer');
+    players.forEach(div => {
+        if (el.checked)
+            addYoutube(div);
+        else
+            addVideojs(div);
+    });
+
+    addTimeLinks();
+}
+
+function multiplayerSwitch(isVideo)
+{
+  //console.log("Setting video=" + isVideo);
+  let containers = document.querySelectorAll('.multiplayer');
+  containers.forEach(container => { switchplayer(container, isVideo) });
+}
+
+async function switchplayer(container, isVideo)
+{
+    if (isVideo)
+    {
+        // Switch VideoJs to YouTube
+        let vjArray = container.getElementsByTagName('video-js');
+        if (vjArray.length)
+        {
+            vjElement = vjArray[0];
+            // console.log("Have videojs: " + vjElement.id)
+            let vjPlayer = videojs(vjElement);
+            let vjPlaying = !vjPlayer.paused();
+            let vjTime = vjPlayer.currentTime();
+            container.removeChild(vjElement);
+            addYoutube(container, vjPlaying, vjTime);
+        }
+    }
+    else {
+        let ytArray = container.getElementsByTagName('lite-youtube');
+        if (ytArray.length)
+        {
+            // Switch YouTube to VideoJs
+            let ytElement = ytArray[0];
+            // console.log("Have youtube: " + ytElement.id);
+            let ytPlayer = await ytElement.getYTPlayer();
+            let ytTime = ytPlayer.getCurrentTime();
+            let ytPlaying = ytPlayer.getPlayerState() == 1;
+            container.removeChild(ytElement);
+            addVideojs(container, ytPlaying, ytTime);
+        }
+    }
+}
+
+async function addYoutube(container, autoplay = false, offset = 0)
+{
+    //console.log("addYoutube")
+    ytElement = document.createElement("lite-youtube");
+    let attribute = container.getAttribute("data-youtubeid");
+    ytElement.setAttribute("id", "lite-youtube-" + container.id);
+    ytElement.setAttribute("videoid", attribute);
+    ytElement.setAttribute("js-api", "true");
+    ytElement = container.appendChild(ytElement);
+
+    //console.log("added youtube " + ytElement)
+    if (offset)
+    {
+        //console.log("Skip to " + offset + " playing=" + autoplay)
+        let ytPlayer = await ytElement.getYTPlayer();
+        ytPlayer?.seekTo(offset, true);                
+        if (autoplay)
+            ytPlayer?.playVideo();
+        else
+            ytPlayer?.pauseVideo();                
+    }
+}
+
+function addVideojs(container, autoplay = false, offset = 0)
+{
+    //console.log("addVideojs")
+    vjElement = document.createElement("video-js");
+    vjElement.setAttribute("id", "video-js-" + container.id);
+    vjElement.setAttribute("controls", true);
+    vjElement.setAttribute("fluid", true);
+    let source = document.createElement('source');
+    let attribute = container.getAttribute("data-audiourl");
+    source.setAttribute("src", attribute);
+    source.setAttribute("type", "audio/mp4");
+
+    attribute = container.getAttribute("data-poster");
+    vjElement.setAttribute("poster", attribute);
+
+    vjElement.appendChild(source);
+
+    let vjPlayer = videojs(
+        vjElement,
+        {
+            html5: { preloadTextTracks: false },
+            controlBar: { skipButtons: { forward: 5, backward: 10 } },
+            playbackRates: [0.5, 1, 1.5, 2],
+            autoplay: autoplay
+        }
+    );
+
+    if (offset)
+        vjPlayer.currentTime(offset);
+
+    container.appendChild(vjElement);
+}
+
+function addTimeLinks() {
+    let timelinks = document.querySelectorAll('.timelinks time');
+    timelinks.forEach(div => {
+        div.classList.add("timelink");
+        div.addEventListener("click", function (ev) {
+            let ta = ev.target.innerHTML.split(':');
+            let ts = 0;
+            ta.forEach(t => ts = ts * 60 + Number(t));
+            multiplayerSeek(ts)
+        });
+    });
+}
+
+async function multiplayerSeek(seconds)
+{
+    let ytArray = document.getElementsByTagName('lite-youtube');
+    if (ytArray.length)
+    {
+        // The youtube player is active
+        let ytPlayer = await ytArray[0].getYTPlayer();
+        ytPlayer?.seekTo(seconds, true);
+        ytPlayer?.playVideo();
+    }
+    else {
+        let vjArray = document.getElementsByTagName('video-js');
+        if (vjArray.length)
+        {
+            // The videoJs player is active
+            let vjPlayer = videojs(vjArray[0]);
+            vjPlayer.currentTime(seconds);
+            vjPlayer.play();
+    }
+  }
+}
+</script>
