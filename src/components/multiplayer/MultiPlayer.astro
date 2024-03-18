@@ -19,6 +19,6 @@ export interface Props extends astroHTML.JSX.HTMLAttributes {
 }
 
 const { youtubeid, audiourl, poster, ...attrs } = Astro.props as Props;
-attrs["class"] += " multiplayer";
+attrs["class"] = (attrs["class"] ? attrs["class"] + " " : "") + "multiplayer";
 ---
 <div {...attrs} data-youtubeid={youtubeid} data-audiourl={audiourl} data-poster={poster}></div>
