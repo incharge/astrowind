@@ -68,7 +68,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
         },
       ]}
     >
-      {import.meta.env.MODE} mode
+      This is a development site.  For the live site see <a href="https://www.thedissenter.net/">https://www.thedissenter.net/</a>"
     </div>
     ) : null
   }  
@@ -123,7 +123,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
               ) : (
                 <a
                   class:list={[
-                    "hover:text-link dark:hover:text-white px-2 mx-2 my-3 flex items-centers bg-gray-100/10 hover:bg-gray-100/50 rounded",
+                    "hover:text-link dark:hover:text-white px-2 mx-2 my-2 flex items-centers bg-gray-100/10 hover:bg-gray-100/50 rounded",
                     { "aw-link-active": href === currentPath }
                   ]}
                   href={href}
@@ -142,10 +142,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
         "hidden md:self-center flex flex-col md:flex md:flex-row items-center md:mb-0 relative w-full md:w-auto md:static justify-end rtl:left-auto rtl:right-0 md:p-0",
       ]}
     >
-      <div class="items-center flex justify-between w-full md:w-auto p-3">
+      <div class="items-center flex justify-between w-full md:w-auto pl-6 py-2 md:p-0">
         <MultiplayerAv />
       </div>
-      <div class="items-center flex justify-between w-full md:w-auto p-3">
+      <div class="items-center flex justify-between w-full md:w-auto pl-4 py-2 md:p-0">
 {/*
         <div class="flex">
           {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />}
