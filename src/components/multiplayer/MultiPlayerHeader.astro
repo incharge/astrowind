@@ -40,6 +40,13 @@ function multiplayerSwitch(isVideo)
 
 async function switchplayer(container, isVideo)
 {
+    let isPlaying = false;
+    let offset = 0;
+
+    let nmArray = container.querySelectorAll('.multiplayernomedia');
+    if (nmArray.length)
+        container.removeChild(nmArray[0]);
+    
     if (isVideo)
     {
         // Switch VideoJs to YouTube
@@ -49,11 +56,11 @@ async function switchplayer(container, isVideo)
             vjElement = vjArray[0];
             // console.log("Have videojs: " + vjElement.id)
             let vjPlayer = videojs(vjElement);
-            let vjPlaying = !vjPlayer.paused();
-            let vjTime = vjPlayer.currentTime();
+            isPlaying = !vjPlayer.paused();
+            offset = vjPlayer.currentTime();
             container.removeChild(vjElement);
-            addYoutube(container, vjPlaying, vjTime);
         }
+        addYoutube(container, isPlaying, offset);
     }
     else {
         let ytArray = container.getElementsByTagName('lite-youtube');
@@ -63,21 +70,25 @@ async function switchplayer(container, isVideo)
             let ytElement = ytArray[0];
             // console.log("Have youtube: " + ytElement.id);
             let ytPlayer = await ytElement.getYTPlayer();
-            let ytTime = ytPlayer.getCurrentTime();
-            let ytPlaying = ytPlayer.getPlayerState() == 1;
+            isPlaying = ytPlayer.getPlayerState() == 1;
+            offset = ytPlayer.getCurrentTime();
             container.removeChild(ytElement);
-            addVideojs(container, ytPlaying, ytTime);
         }
+        addVideojs(container, isPlaying, offset);
     }
 }
 
 async function addYoutube(container, autoplay = false, offset = 0)
 {
+    let youtubeid = container.getAttribute("data-youtubeid");
+    if (youtubeid == null) {
+        addNoMedia(container, true);
+        return;
+    }
     // console.log("add Youtube to " + container.id)
     ytElement = document.createElement("lite-youtube");
     ytElement.setAttribute("class", container.getAttribute("class").replace("/ ?multiplayer", ""));
-    let attribute = container.getAttribute("data-youtubeid");
-    ytElement.setAttribute("videoid", attribute);
+    ytElement.setAttribute("videoid", youtubeid);
     ytElement.setAttribute("js-api", "true");
     ytElement = container.appendChild(ytElement);
 
@@ -96,18 +107,19 @@ async function addYoutube(container, autoplay = false, offset = 0)
 
 function addVideojs(container, autoplay = false, offset = 0)
 {
+    let audiourl = container.getAttribute("data-audiourl");
+    if (audiourl == null) {
+        addNoMedia(container, false);
+        return;
+    }
     //console.log("addVideojs")
     vjElement = document.createElement("video-js");
     vjElement.setAttribute("controls", true);
     vjElement.setAttribute("fluid", true);
     let source = document.createElement('source');
-    let attribute = container.getAttribute("data-audiourl");
-    source.setAttribute("src", attribute);
+    source.setAttribute("src", audiourl);
     source.setAttribute("type", "audio/mp4");
-
-    attribute = container.getAttribute("data-poster");
-    vjElement.setAttribute("poster", attribute);
-
+    vjElement.setAttribute("poster", container.getAttribute("data-poster"));
     vjElement.appendChild(source);
 
     let vjPlayer = videojs(
@@ -124,6 +136,14 @@ function addVideojs(container, autoplay = false, offset = 0)
         vjPlayer.currentTime(offset);
 
     container.appendChild(vjElement);
+}
+
+function addNoMedia(container, isVideo) {
+    el = document.createElement("div");
+    el.setAttribute("class", "multiplayernomedia");
+    el.innerHTML = "<div style=\"padding: 10px; border-radius: 10px; border-style: solid; background-color: #ff6060; font-size: 1.5em; font-weight: bold; text-align: center;\">There is currently no " + (isVideo ? "video" : "audio") + " version available for this episode</div>";
+    attribute = container.getAttribute("data-poster");
+    container.appendChild(el);
 }
 
 function addTimeLinks() {
