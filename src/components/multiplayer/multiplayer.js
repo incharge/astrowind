@@ -1,21 +1,4 @@
----
-// JavaScript for MultiPlayer.
-// Include this in the page header.
-// Call multiplayerInit() in the page onload
-// See MultiPlayer.astro
-import 'video.js/dist/video-js.min.css';
-import 'lite-youtube-embed/src/lite-yt-embed.css';
-// To import WITH processing:
-// <script src="../../assets/video.js"></script>
-// TODO: How to import directly from the node module?
-// <script>import 'video.js/dist/video.js';</script>
-// To import WITHOUT processing from :
-// <script is:inline src={import.meta.env.BASE_URL + "video.js"}></script>
----
-<script>import 'lite-youtube-embed';</script>
-<script is:inline src={import.meta.env.BASE_URL + "video.min.js"}></script>
-<script is:inline>
-function multiplayerInit() {
+export function multiplayerInit() {
     let el = document.getElementById("multiplayerav");
     if (el)
         el.addEventListener("click", function(ev){multiplayerSwitch(ev.target.checked);});
@@ -53,7 +36,7 @@ async function switchplayer(container, isVideo)
         let vjArray = container.getElementsByTagName('video-js');
         if (vjArray.length)
         {
-            vjElement = vjArray[0];
+            let vjElement = vjArray[0];
             // console.log("Have videojs: " + vjElement.id)
             let vjPlayer = videojs(vjElement);
             isPlaying = !vjPlayer.paused();
@@ -86,7 +69,7 @@ async function addYoutube(container, autoplay = false, offset = 0)
         return;
     }
     // console.log("add Youtube to " + container.id)
-    ytElement = document.createElement("lite-youtube");
+    let ytElement = document.createElement("lite-youtube");
     ytElement.setAttribute("class", container.getAttribute("class"));
     ytElement.classList.remove("multiplayer");
     ytElement.setAttribute("videoid", youtubeid);
@@ -114,7 +97,7 @@ function addVideojs(container, autoplay = false, offset = 0)
         return;
     }
     //console.log("addVideojs")
-    vjElement = document.createElement("video-js");
+    let vjElement = document.createElement("video-js");
     vjElement.setAttribute("controls", true);
     vjElement.setAttribute("fluid", true);
     let source = document.createElement('source');
@@ -181,4 +164,3 @@ async function multiplayerSeek(seconds)
     }
   }
 }
-</script>
