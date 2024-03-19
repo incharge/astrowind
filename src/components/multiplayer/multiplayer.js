@@ -1,4 +1,10 @@
-const global = { cookies: false };
+class GlobalState {
+    constructor() {
+        this.cookies = false;
+        this.isVideo = false;
+    }
+}
+const global = new GlobalState();
 
 const setCookie = (name, value, days = 7, path = '/') => {
     const expires = new Date(Date.now() + days * 864e5).toUTCString()
@@ -16,8 +22,18 @@ const deleteCookie = (name, path) => {
     setCookie(name, '', -1, path)
 }
 
+export function changeCookie(useCookies) {
+    if (useCookies) {
+        setCookie("mpvideo", global.isVideo ? "1" : "0", 365);
+    }
+    else {
+        deleteCookie("player")
+    }
+}
+
 export function multiplayerInit(useCookies = false, isVideo = true) {
     global.cookies = useCookies;
+    global.isVideo = isVideo;
 
     if (useCookies) {
         let cookie = getCookie("mpvideo");
@@ -29,6 +45,7 @@ export function multiplayerInit(useCookies = false, isVideo = true) {
     if (el) {
         el.addEventListener("click", function(ev){multiplayerSwitch(ev.target.checked);});
         el.checked = isVideo;
+        //console.log("multiplayerInit: Setting video: " + isVideo);
     }
 
     let players = document.querySelectorAll('.multiplayer');
@@ -47,6 +64,7 @@ function multiplayerSwitch(isVideo)
   let containers = document.querySelectorAll('.multiplayer');
   containers.forEach(container => { switchplayer(container, isVideo) });
 
+  global.isVideo = isVideo;
   if (global.cookies)
     setCookie("mpvideo", isVideo ? "1" : "0", 365);
 }

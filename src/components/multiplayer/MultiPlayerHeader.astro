@@ -19,4 +19,9 @@ import 'lite-youtube-embed/src/lite-yt-embed.css';
     import * as CookieConsent from "vanilla-cookieconsent";
     import * as MultiPlayer from "./multiplayer.js";
     MultiPlayer.multiplayerInit(CookieConsent.acceptedCategory("player"));
+    window.addEventListener('cc:onChange', ({detail}) => {
+        if (detail.changedCategories == "player") {
+            MultiPlayer.changeCookie(CookieConsent.acceptedCategory("player"));
+        }
+    });
 </script>
