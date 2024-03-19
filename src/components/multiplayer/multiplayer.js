@@ -1,11 +1,39 @@
-export function multiplayerInit() {
+const global = { cookies: false };
+
+const setCookie = (name, value, days = 7, path = '/') => {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString()
+    document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path
+}
+  
+const getCookie = (name) => {
+    return document.cookie.split('; ').reduce((r, v) => {
+        const parts = v.split('=')
+        return parts[0] === name ? decodeURIComponent(parts[1]) : r
+    }, '')
+}
+  
+const deleteCookie = (name, path) => {
+    setCookie(name, '', -1, path)
+}
+
+export function multiplayerInit(useCookies = false, isVideo = true) {
+    global.cookies = useCookies;
+
+    if (useCookies) {
+        let cookie = getCookie("mpvideo");
+        if (cookie != "")
+            isVideo = cookie == "1";
+    }
+
     let el = document.getElementById("multiplayerav");
-    if (el)
+    if (el) {
         el.addEventListener("click", function(ev){multiplayerSwitch(ev.target.checked);});
+        el.checked = isVideo;
+    }
 
     let players = document.querySelectorAll('.multiplayer');
     players.forEach(div => {
-        if (el.checked)
+        if (isVideo)
             addYoutube(div);
         else
             addVideojs(div);
@@ -16,9 +44,11 @@ export function multiplayerInit() {
 
 function multiplayerSwitch(isVideo)
 {
-  //console.log("Setting video=" + isVideo);
   let containers = document.querySelectorAll('.multiplayer');
   containers.forEach(container => { switchplayer(container, isVideo) });
+
+  if (global.cookies)
+    setCookie("mpvideo", isVideo ? "1" : "0", 365);
 }
 
 async function switchplayer(container, isVideo)

@@ -17,9 +17,12 @@ export const config: CookieConsentConfig = {
     necessary: {
       readOnly: true,
     },
+    player: {
+      enabled: true,
+    },
     analytics: {
-        enabled: true,
-    }
+      enabled: true,
+    },
   },
   language: {
     default: 'en',
@@ -56,6 +59,13 @@ export const config: CookieConsentConfig = {
               description:
                 'A cookie is used to remember whether you prefer to accept or reject other cookies. Without this, the cookie messages would keep appearing. This cookie is not observed by the web server.',
               linkedCategory: 'necessary',
+            },
+            {
+              title:
+                'Media player preferences',
+              description:
+                'You can choose to listen to podcast episodes as audio or watch the video too. A cookie is used to remember your choice.',
+              linkedCategory: 'player',
             },
             {
               title: 'Google Analytics Cookies',

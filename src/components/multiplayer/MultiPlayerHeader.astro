@@ -5,16 +5,18 @@
 // See MultiPlayer.astro
 import 'video.js/dist/video-js.min.css';
 import 'lite-youtube-embed/src/lite-yt-embed.css';
-// To import WITH processing:
+// How do we include video.min.js directly from nodejs without further compression? (because it is already compressed)
+// To import WITH compression (however this renames videojs):
 // <script src="../../assets/video.js"></script>
-// TODO: How to import directly from the node module?
 // <script>import 'video.js/dist/video.js';</script>
-// To import WITHOUT processing from :
-// <script is:inline src={import.meta.env.BASE_URL + "video.js"}></script>
+// import { videojs } from 'video.js/dist/video.js';
+// To import WITHOUT minifying (however this requires copying the file to ):
+// <script is:inline src={import.meta.env.BASE_URL + "video.min.js"}></script>
 ---
 <script>import 'lite-youtube-embed';</script>
 <script is:inline src={import.meta.env.BASE_URL + "video.min.js"}></script>
 <script>
+    import * as CookieConsent from "vanilla-cookieconsent";
     import * as MultiPlayer from "./multiplayer.js";
-    MultiPlayer.multiplayerInit();
+    MultiPlayer.multiplayerInit(CookieConsent.acceptedCategory("player"));
 </script>

@@ -3,11 +3,11 @@ import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import '../assets/styles/ccElegantBlack.css';
 ---
 <script>
-    import { run } from 'vanilla-cookieconsent';
+    import * as CookieConsent from "vanilla-cookieconsent";
     import { config } from './CookieConsentConfig';
 
     // toggle custom black theme
     document.body.classList.add('cc--elegant-black');
 
-    run(config);
+    CookieConsent.run(config);
 </script>
