@@ -17,11 +17,13 @@ import 'lite-youtube-embed/src/lite-yt-embed.css';
 <script is:inline src={import.meta.env.BASE_URL + "video.min.js"}></script>
 <script>
     import * as CookieConsent from "vanilla-cookieconsent";
+    import { preferences } from "./preferences";
     import * as MultiPlayer from "./multiplayer.js";
-    MultiPlayer.multiplayerInit(CookieConsent.acceptedCategory("player"));
-    window.addEventListener('cc:onChange', ({detail}) => {
-        if (detail.changedCategories == "player") {
-            MultiPlayer.changeCookie(CookieConsent.acceptedCategory("player"));
+    preferences.init(CookieConsent.acceptedCategory("player"), true);
+    MultiPlayer.init();
+    window.addEventListener('cc:onChange', (e) => {
+        if ((e as any).detail.changedCategories == "player") {
+            preferences.setUseCookies(CookieConsent.acceptedCategory("player"));
         }
     });
 </script>

@@ -1,45 +1,7 @@
-class GlobalState {
-    constructor() {
-        this.cookies = false;
-        this.isVideo = false;
-    }
-}
-const global = new GlobalState();
+import { preferences } from "./preferences.js"
 
-const setCookie = (name, value, days = 7, path = '/') => {
-    const expires = new Date(Date.now() + days * 864e5).toUTCString()
-    document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path
-}
-  
-const getCookie = (name) => {
-    return document.cookie.split('; ').reduce((r, v) => {
-        const parts = v.split('=')
-        return parts[0] === name ? decodeURIComponent(parts[1]) : r
-    }, '')
-}
-  
-const deleteCookie = (name, path) => {
-    setCookie(name, '', -1, path)
-}
-
-export function changeCookie(useCookies) {
-    if (useCookies) {
-        setCookie("mpvideo", global.isVideo ? "1" : "0", 365);
-    }
-    else {
-        deleteCookie("player")
-    }
-}
-
-export function multiplayerInit(useCookies = false, isVideo = true) {
-    global.cookies = useCookies;
-    global.isVideo = isVideo;
-
-    if (useCookies) {
-        let cookie = getCookie("mpvideo");
-        if (cookie != "")
-            isVideo = cookie == "1";
-    }
+export function init() {
+    const isVideo = preferences.isVideo;
 
     let el = document.getElementById("multiplayerav");
     if (el) {
@@ -61,12 +23,9 @@ export function multiplayerInit(useCookies = false, isVideo = true) {
 
 function multiplayerSwitch(isVideo)
 {
-  let containers = document.querySelectorAll('.multiplayer');
-  containers.forEach(container => { switchplayer(container, isVideo) });
-
-  global.isVideo = isVideo;
-  if (global.cookies)
-    setCookie("mpvideo", isVideo ? "1" : "0", 365);
+    preferences.setIsVideo(isVideo);
+    let containers = document.querySelectorAll('.multiplayer');
+    containers.forEach(container => { switchplayer(container, isVideo) });
 }
 
 async function switchplayer(container, isVideo)
@@ -193,13 +152,15 @@ function addTimeLinks() {
 
 async function multiplayerSeek(seconds)
 {
-    let ytArray = document.getElementsByTagName('lite-youtube');
-    if (ytArray.length)
-    {
-        // The youtube player is active
-        let ytPlayer = await ytArray[0].getYTPlayer();
-        ytPlayer?.seekTo(seconds, true);
-        ytPlayer?.playVideo();
+    if (preferences.isVideo) {
+        let ytArray = document.getElementsByTagName('lite-youtube');
+        if (ytArray.length)
+        {
+            // The youtube player is active
+            let ytPlayer = await ytArray[0].getYTPlayer();
+            ytPlayer?.seekTo(seconds, true);
+            ytPlayer?.playVideo();
+        }
     }
     else {
         let vjArray = document.getElementsByTagName('video-js');
