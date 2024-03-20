@@ -67,15 +67,20 @@ async function switchplayer(container, isVideo)
         addYoutube(container, isPlaying, offset);
     }
     else {
+        // Switch YouTube to VideoJs
         let ytElement = getFirstElement(container, 'lite-youtube');
         if (ytElement)
         {
-            // Switch YouTube to VideoJs
-            //console.log("Have youtube: " + ytElement);
-            let ytPlayer = await ytElement.getYTPlayer();
-            isPlaying = ytPlayer.getPlayerState() == 1;
-            offset = ytPlayer.getCurrentTime();
-            //ytPlayer.style.display = 'none'; No! - Causes the player to play
+            // Get the YouTube player status
+            if (getFirstElement(ytElement, 'iframe')) {
+                //console.log("Have youtube: " + ytElement);
+                let ytPlayer = await ytElement.getYTPlayer();
+                isPlaying = ytPlayer.getPlayerState() == 1;
+                offset = ytPlayer.getCurrentTime();
+                //ytPlayer.style.display = 'none'; No! - Causes the player to play
+            }
+            // else - the player wasn't played
+            // Delete the YouTube player
             container.removeChild(ytElement);
         }
         addVideojs(container, isPlaying, offset);
