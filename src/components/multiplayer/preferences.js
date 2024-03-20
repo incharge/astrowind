@@ -1,3 +1,5 @@
+// Cookie handling from artnikpro's answer at
+// https://stackoverflow.com/questions/4825683/how-do-i-create-and-read-a-value-from-cookie-with-javascript
 const setCookie = (name, value, days = 7, path = '/') => {
     const expires = new Date(Date.now() + days * 864e5).toUTCString()
     document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path
