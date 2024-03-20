@@ -19,10 +19,25 @@ const attrs = merge(
 <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} {...attrs}></script>
 
 <script is:inline define:vars={{ id }} {...attrs}>
+  //console.log("Google Analytics is initialising");
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     window.dataLayer.push(arguments);
   }
   gtag("js", new Date());
   gtag("config", id);
+</script>
+
+<script>
+  import * as CookieConsent from "vanilla-cookieconsent";
+  import * as preferences from "./multiplayer/preferences";
+  function enforce() {
+    if (!CookieConsent.acceptedCategory("analytics"))
+        preferences.deleteCookies("^_ga");
+  }
+  enforce();
+  window.addEventListener('cc:onChange', (e) => {
+    if ( (e as any).detail.changedCategories.indexOf("analytics") >= 0 )
+      enforce();
+  });
 </script>
