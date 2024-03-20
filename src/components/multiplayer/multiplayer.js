@@ -23,13 +23,27 @@ export function init() {
 
 function multiplayerSwitch(isVideo)
 {
+    //console.log("multiplayerSwitch - Start: isVideo=" + isVideo);
     preferences.setIsVideo(isVideo);
     let containers = document.querySelectorAll('.multiplayer');
-    containers.forEach(container => { switchplayer(container, isVideo) });
+    containers.forEach(container => { switchplayer(container, isVideo); });
+    //console.log("multiplayerSwitch - End: isVideo=" + isVideo);
+}
+
+function getFirstElement(container, tag) {
+    let array = container.getElementsByTagName(tag);
+    return array.length ? array[0] : null;    
 }
 
 async function switchplayer(container, isVideo)
 {
+    //console.log("switchplayer - Start: isVideo=" + isVideo);
+
+    if (isVideo != preferences.isVideo) {
+        //console.log( "switchplayer: Do nothing because switch is old. isVideo=" + isVideo)
+        return;
+    }
+
     let isPlaying = false;
     let offset = 0;
 
@@ -40,28 +54,28 @@ async function switchplayer(container, isVideo)
     if (isVideo)
     {
         // Switch VideoJs to YouTube
-        let vjArray = container.getElementsByTagName('video-js');
-        if (vjArray.length)
+        let vjElement = getFirstElement(container, 'video-js')
+        if (vjElement)
         {
-            let vjElement = vjArray[0];
-            // console.log("Have videojs: " + vjElement.id)
+            //console.log("Have videojs: " + vjElement)
             let vjPlayer = videojs(vjElement);
             isPlaying = !vjPlayer.paused();
             offset = vjPlayer.currentTime();
+            //vjPlayer.style.display = 'none';
             container.removeChild(vjElement);
         }
         addYoutube(container, isPlaying, offset);
     }
     else {
-        let ytArray = container.getElementsByTagName('lite-youtube');
-        if (ytArray.length)
+        let ytElement = getFirstElement(container, 'lite-youtube');
+        if (ytElement)
         {
             // Switch YouTube to VideoJs
-            let ytElement = ytArray[0];
-            // console.log("Have youtube: " + ytElement.id);
+            //console.log("Have youtube: " + ytElement);
             let ytPlayer = await ytElement.getYTPlayer();
             isPlaying = ytPlayer.getPlayerState() == 1;
             offset = ytPlayer.getCurrentTime();
+            //ytPlayer.style.display = 'none'; No! - Causes the player to play
             container.removeChild(ytElement);
         }
         addVideojs(container, isPlaying, offset);
@@ -70,12 +84,18 @@ async function switchplayer(container, isVideo)
 
 async function addYoutube(container, autoplay = false, offset = 0)
 {
+    if (!preferences.isVideo) {
+        //console.log( "addYoutube: Don't add video in audio mode");
+        return;
+    }
+
     let youtubeid = container.getAttribute("data-youtubeid");
     if (youtubeid == null) {
         addNoMedia(container, true);
         return;
     }
-    // console.log("add Youtube to " + container.id)
+
+    // Don't check if there'a already an element because it may be in the process of being destroyed
     let ytElement = document.createElement("lite-youtube");
     ytElement.setAttribute("class", container.getAttribute("class"));
     ytElement.classList.remove("multiplayer");
@@ -98,12 +118,19 @@ async function addYoutube(container, autoplay = false, offset = 0)
 
 function addVideojs(container, autoplay = false, offset = 0)
 {
+    //console.log("addVideojs - start")
+    if (preferences.isVideo) {
+        //console.log( "addYoutube: Don't add video in audio mode")
+        return;
+    }
+
     let audiourl = container.getAttribute("data-audiourl");
     if (audiourl == null) {
         addNoMedia(container, false);
         return;
     }
-    //console.log("addVideojs")
+
+    // Don't check if there'a already an element because it may be in the process of being destroyed
     let vjElement = document.createElement("video-js");
     vjElement.setAttribute("controls", true);
     vjElement.setAttribute("fluid", true);
