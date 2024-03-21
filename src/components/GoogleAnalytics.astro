@@ -12,32 +12,67 @@ const { id = "GA_MEASUREMENT_ID", partytown = false, vanillacookieconsent = true
 
 const attrs = merge(
         partytown ? { type: "text/partytown" } : {},
-        vanillacookieconsent ? { type: "text/plain", "data-category": "analytics" } : {}
+        //vanillacookieconsent ? { type: "text/plain", "data-category": "analytics" } : {}
     )
 ---
 
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+  });
+</script>
 <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} {...attrs}></script>
 
 <script is:inline define:vars={{ id }} {...attrs}>
   //console.log("Google Analytics is initialising");
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    window.dataLayer.push(arguments);
-  }
   gtag("js", new Date());
   gtag("config", id);
 </script>
 
-<script>
-  import * as CookieConsent from "vanilla-cookieconsent";
-  import * as preferences from "./multiplayer/preferences";
+<script is:inline>
+  //import * as CookieConsent from "vanilla-cookieconsent";
+  //import { deleteCookies } from "./multiplayer/preferences";
+
+  // declare global {
+  //   interface Window { dataLayer: any; }
+  // }
+  // function gtag(x, y, z){
+  //   window.dataLayer.push(arguments);
+  // }
+
+  function consent(category) {
+    const ls = localStorage.getItem("cookie_consent");
+    return ls ? (JSON.parse(ls).categories.indexOf(category) >= 0) : false;
+  }
+
+  const deleteCookies = (pattern) => {
+    const re = new RegExp(pattern);
+    const expires = new Date(Date.now() - 864e5).toUTCString()
+    document.cookie.split('; ').forEach((v) => {
+        const parts = v.split('=');
+        if (re.test(parts[0]))
+          document.cookie = parts[0] + '=; expires=' + expires + '; path=/';
+    });
+  }
+
   function enforce() {
-    if (!CookieConsent.acceptedCategory("analytics"))
-        preferences.deleteCookies("^_ga");
+    const bConsent = consent("analytics");
+    const strConsent = bConsent ? "granted" : "denied"; // CookieConsent.acceptedCategory("analytics");
+    const gaPerms = {
+        analytics_storage: strConsent,
+      };
+    //console.log("Google Analytics consent updating to: " + JSON.stringify(gaPerms));
+    gtag("consent", "update", gaPerms);
+    if (!bConsent)
+      deleteCookies("^_ga");
   }
   enforce();
+
   window.addEventListener('cc:onChange', (e) => {
-    if ( (e as any).detail.changedCategories.indexOf("analytics") >= 0 )
+    //if ( (e as any).detail.changedCategories.indexOf("analytics") >= 0 )
+    if ( (e).detail.changedCategories.indexOf("analytics") >= 0 )
       enforce();
   });
 </script>
