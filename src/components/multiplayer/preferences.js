@@ -1,72 +1,55 @@
-// Cookie handling inspired by artnikpro's answer at
-// https://stackoverflow.com/questions/4825683/how-do-i-create-and-read-a-value-from-cookie-with-javascript
-const setCookie = (name, value, days = 7, path = '/') => {
-    const expires = new Date(Date.now() + days * 864e5).toUTCString()
-    document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path
-}
-
-const getCookie = (name) => {
-    return document.cookie.split('; ').reduce((r, v) => {
-        const parts = v.split('=')
-        return parts[0] === name ? decodeURIComponent(parts[1]) : r
-    }, '')
-}
-
-const getCookies = (pattern) => {
-    const re = new RegExp(pattern);
-    const a = [];
-    document.cookie.split('; ').forEach((v) => {
-        const parts = v.split('=');
-        if (re.test(parts[0]))
-            a.push(parts[0]);
-    });
-    return a;
-}
-
-const deleteCookie = (name, path) => {
-    setCookie(name, '', -1, path);
-}
-
-export const deleteCookies = (pattern) => {
-    getCookies(pattern).forEach( (v) => {
-        //console.log("preferences.deleteCookies deleting " + v);
-        deleteCookie(v);
-    });
-}
+const safeRun = (fn) => {
+    try {
+        return fn();
+    } catch (e) {
+        console.warn('preferences:', e);
+        return false;
+    }
+};
 
 class Preferences {
     constructor() {
-        this.useCookies = false;
+        this.isConsent = false;
         this.isVideo = true;
     }
 
-    init(useCookies = false, isVideo = true) {
-        //console.log("Init. useCookies=" + useCookies + ", isVideo=" + isVideo);
-        this.useCookies = useCookies;
-        this.isVideo = isVideo;
-        if (this.useCookies) {
-            const cookie = getCookie("isVideo");
-            //console.log("preferences.init cookie='" + cookie + "'");
-            if (cookie != "")
-                this.isVideo = cookie == "1";
-        }
-        //console.log("preferences.init: useCookies=" + this.useCookies + ", isVideo=" + this.isVideo);
+    getItem(key) {
+        return safeRun(() => localStorage.getItem(key)) || '';
+    }
+    setItem(key, value) {
+        safeRun(() => localStorage.setItem(key, value));
+    }
+    removeItem(key) {
+        safeRun(() => localStorage.removeItem(key));
     }
 
-    setUseCookies(useCookies) {
-        //console.log("setUseCookies=" + useCookies);
-        this.useCookies = useCookies;
-        if (useCookies)
-            setCookie("isVideo", preferences.isVideo ? "1" : "0", 365);
+    init(isConsent = false, isVideo = true) {
+        //console.log('preferences.init. Parameters: isConsent=' + isConsent + ', isVideo=' + isVideo);
+        this.isConsent = isConsent;
+        this.isVideo = isVideo;
+        if (this.isConsent) {
+            const cookie = this.getItem('isVideo');
+            //console.log('preferences.init cookie="' + cookie + '"');
+            if (cookie != '')
+                this.isVideo = cookie == '1';
+        }
+        //console.log('preferences.init. Resulting settings: isConsent=' + this.isConsent + ', isVideo=' + this.isVideo);
+    }
+
+    setIsConsent(isConsent) {
+        //console.log('setIsConsent=' + isConsent);
+        this.isConsent = isConsent;
+        if (isConsent)
+            this.setItem('isVideo', preferences.isVideo ? '1' : '0')
         else
-            deleteCookie("isVideo");
+            this.removeItem('isVideo');
     }
 
     setIsVideo(isVideo) {
-        //console.log("preferences.setIsVideo: " + isVideo);
+        //console.log('preferences.setIsVideo: ' + isVideo);
         this.isVideo = isVideo;
-        if (this.useCookies)
-          setCookie("isVideo", isVideo ? "1" : "0", 365);
+        if (this.isConsent)
+            this.setItem('isVideo', isVideo ? '1' : '0')
     }
 }
 

@@ -1,6 +1,11 @@
 import type { CookieConsentConfig } from 'vanilla-cookieconsent';
 
 export const config: CookieConsentConfig = {
+  cookie: {
+      name: 'cookie_consent',
+      expiresAfterDays: 365,
+      useLocalStorage: true,
+  },
   guiOptions: {
     consentModal: {
       layout: 'box inline',
@@ -30,9 +35,9 @@ export const config: CookieConsentConfig = {
     translations: {
       en: {
         consentModal: {
-          title: "We use cookies for preferences and statistics",
+          title: "We use cookies for statistics.  We use local storage for preferences.",
           description:
-            'This web site uses cookies to save your preferences and to collect and store statistics about how visitors use the website.',
+            'This web site uses cookies to collect and store statistics about how visitors use the website.  Your preferences, such as whether you prefer audio or video, are stored locally on your device without using cookies and are never transmitted over the Internet.',
           acceptAllBtn: 'Accept all',
           showPreferencesBtn: 'Manage preferences',
           footer:
@@ -48,29 +53,29 @@ export const config: CookieConsentConfig = {
           serviceCounterLabel: 'Service|Services',
           sections: [
             {
-              title: 'Cookie Usage',
+              title: 'Cookie and local storage usage',
               description:
-                'This web site uses cookies to save your preferences and to collect and store statistics about how visitors use the website.\
+                'This web site uses cookies to collect and store statistics about how visitors use the website.  Your preferences, such as whether you prefer audio or video, are stored locally on your device without using cookies and are never transmitted over the Internet.\
                 For more information, see our <a href="/cookies/">Cookie Policy</a>.',
             },
             {
               title:
                 'Your cookie preference <span class="pm__badge">Always Enabled</span>',
               description:
-                'A cookie is used to remember whether you prefer to accept or reject other cookies. Without this, the cookie messages would keep appearing. This cookie is not observed by the web server.',
+                'Your cookie preferences are saved in local storage on your device and are not transmitted over the internet. Otherwise this cookie messages would keep appearing.',
               linkedCategory: 'necessary',
             },
             {
               title:
                 'Media player preferences',
               description:
-                'You can choose to listen to podcast episodes as audio or watch the video too. A cookie is used to remember your choice.',
+                'You can choose to listen to podcast episodes as audio or watch the video too. Your choice is stored locally on your device without using cookies. If you disable this option, then every time you go to another page, your choice is lost and the player options revert to the default.',
               linkedCategory: 'player',
             },
             {
-              title: 'Google Analytics Cookies',
+              title: 'Google Analytics uses cookies',
               description:
-                'Google Analytics uses a cookie to collect and store data about how visitors use the website. This data is anonymous and agregated. If you prefer your visit to be excluded from statistics, you may disable Google Analytics cookies.',
+                'Google Analytics uses cookies to collect and store data about how visitors use the website. This data is anonymous and agregated.',
               linkedCategory: 'analytics',
             },
           ],

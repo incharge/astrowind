@@ -23,8 +23,8 @@ import 'lite-youtube-embed/src/lite-yt-embed.css';
     MultiPlayer.init();
     window.addEventListener('cc:onChange', (e) => {
         if ((e as any).detail.changedCategories.indexOf("player") >= 0) {
-            //console.log("cc:onChange category=player. Setting useCookies=" + CookieConsent.acceptedCategory("player"));
-            preferences.setUseCookies(CookieConsent.acceptedCategory("player"));
+            //console.log("cc:onChange category=player. Setting isConsent=" + CookieConsent.acceptedCategory("player"));
+            preferences.setIsConsent(CookieConsent.acceptedCategory("player"));
         }
     });
 </script>
