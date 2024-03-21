@@ -8,43 +8,40 @@ export interface Props {
   vanillacookieconsent?: boolean;
 }
 
-const { id = "GA_MEASUREMENT_ID", partytown = false, vanillacookieconsent = true } = Astro.props;
+const { id = 'GA_MEASUREMENT_ID', partytown = false, vanillacookieconsent = true } = Astro.props;
 
 const attrs = merge(
-        partytown ? { type: "text/partytown" } : {},
-        //vanillacookieconsent ? { type: "text/plain", "data-category": "analytics" } : {}
+        partytown ? { type: 'text/partytown' } : {},
+        //vanillacookieconsent ? { type: 'text/plain', 'data-category': 'analytics' } : {}
     )
 ---
 
-<script is:inline>
+<script define:vars={{ id }} {...attrs}>
+  //console.log('Google Analytics is initialising: id=' + id);
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('consent', 'default', {
     'analytics_storage': 'denied',
   });
+
+  var gtagScript = document.createElement('script');
+  gtagScript.async = true;
+  gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id' + id;
+  var firstScript = document.getElementsByTagName('script')[0];
+  firstScript.parentNode.insertBefore(gtagScript,firstScript);
+
+  gtag('js', new Date());
+  gtag('config', id);
 </script>
-<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} {...attrs}></script>
 
-<script is:inline define:vars={{ id }} {...attrs}>
-  //console.log("Google Analytics is initialising");
-  gtag("js", new Date());
-  gtag("config", id);
-</script>
+<script>
+  import * as CookieConsent from 'vanilla-cookieconsent';
 
-<script is:inline>
-  //import * as CookieConsent from "vanilla-cookieconsent";
-  //import { deleteCookies } from "./multiplayer/preferences";
-
-  // declare global {
-  //   interface Window { dataLayer: any; }
-  // }
-  // function gtag(x, y, z){
-  //   window.dataLayer.push(arguments);
-  // }
-
-  function consent(category) {
-    const ls = localStorage.getItem("cookie_consent");
-    return ls ? (JSON.parse(ls).categories.indexOf(category) >= 0) : false;
+  declare global {
+    interface Window { dataLayer: any; }
+  }
+  function gtag(...args){
+    window.dataLayer.push(arguments);
   }
 
   const deleteCookies = (pattern) => {
@@ -58,21 +55,18 @@ const attrs = merge(
   }
 
   function enforce() {
-    const bConsent = consent("analytics");
-    const strConsent = bConsent ? "granted" : "denied"; // CookieConsent.acceptedCategory("analytics");
-    const gaPerms = {
-        analytics_storage: strConsent,
-      };
-    //console.log("Google Analytics consent updating to: " + JSON.stringify(gaPerms));
-    gtag("consent", "update", gaPerms);
-    if (!bConsent)
-      deleteCookies("^_ga");
+    const consent = CookieConsent.acceptedCategory('analytics');
+    //console.log('Google Analytics consent updating to: ' + consent);
+    gtag('consent', 'update', {
+        analytics_storage: consent ? 'granted' : 'denied',
+    });
+    if (!consent)
+      deleteCookies('^_ga');
   }
   enforce();
 
   window.addEventListener('cc:onChange', (e) => {
-    //if ( (e as any).detail.changedCategories.indexOf("analytics") >= 0 )
-    if ( (e).detail.changedCategories.indexOf("analytics") >= 0 )
+    if ( (e as any).detail.changedCategories.indexOf('analytics') >= 0 )
       enforce();
   });
 </script>
