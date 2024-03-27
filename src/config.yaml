@@ -1,4 +1,5 @@
 # Changes do not take effect until the astro server (npm run dev) is restarted 
+# if NODE_ENV is 'development' then site and base are overridden by VITE_SITE and VITE_BASE (See config.ts)
 site:
   name: The Dissenter
   site: 'https://www.thedissenter.net/'
