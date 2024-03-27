@@ -1,4 +1,5 @@
 src/content/post/*.md
+src/categories.yaml
 
 # build output
 dist/

@@ -244,6 +244,26 @@ const getAnalytics = () => {
   return merge({}, _default, config?.analytics ?? {}) as AnalyticsConfig;
 };
 
+// Define the expected format of the src/categories.yaml file
+export interface Categories {
+  [id: number]: {
+    id: string,
+    title: string,
+    count: number
+  };
+};
+// Get an array of the titles of non-empty categories
+const getCategories = () => {
+  const categories = yaml.load(fs.readFileSync('src/categories.yaml', 'utf8')) as Categories;
+  const categoryTitles: string[] = [];
+  Object.values(categories).forEach(category => {
+    if (category['count']  > 0)
+      categoryTitles.push(category['title']);
+  });
+  return categoryTitles;
+};
+export const CATEGORIES = getCategories();
+
 export const SITE = getSite();
 export const I18N = getI18N();
 export const METADATA = getMetadata();

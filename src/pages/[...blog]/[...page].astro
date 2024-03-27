@@ -1,7 +1,6 @@
 ---
 // Blog list page
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-import { getPermalink } from '../../utils/permalinks';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
@@ -9,6 +8,10 @@ import BlogList from '~/components/blog/List.astro';
 
 {/* import PaginationAstrowind from '~/components/blog/Pagination.astro'; */}
 import PaginationPhilNash from "@philnash/astro-pagination"; {/* See node_modules/@philnash/astro-pagination */}
+import { SITE, CATEGORIES } from '~/utils/config';
+import { getPermalink } from '../../utils/permalinks';
+import Tags from '~/components/blog/Tags.astro';
+
 // import PostTags from "~/components/blog/Tags.astro";
 
 import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
@@ -38,12 +41,21 @@ const metadata = {
     type: 'blog',
   },
 };
-page.url.prev = getPermalink(page.url.prev);
-page.url.next = getPermalink(page.url.next);
+
+// TODO: Fix pagination so it automatically includes the base URL
+// Meanwhile, Fix the base URL here
+if (page.url.prev && !page.url.prev.startsWith('/' + SITE.base))
+  page.url.prev = getPermalink(page.url.prev);
+if (page.url.next && !page.url.next.startsWith('/' + SITE.base))
+  page.url.next = getPermalink(page.url.next);
+// Show pagination if there's more than one page
+const isPagination = page.lastPage > 1;
+const categories = CATEGORIES;
 ---
 
 <Layout metadata={metadata}>
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
+    <Tags tags={CATEGORIES} isCategory={true}></Tags>
 {/*
     <Headline
       subtitle="A statically generated blog example with news, tutorials, resources and other interesting content related to AstroWind"
@@ -51,14 +63,18 @@ page.url.next = getPermalink(page.url.next);
       The Blog
     </Headline>
 */}
+    <div class="pagination"><PaginationPhilNash
+      page={page}
+      urlPattern={getPermalink("/podcast/{}")} 
+      firstPageUrl={getPermalink("/podcast/")}
+    /></div> {/* firstPageUrl avoids trailing double slash */}
     <BlogList posts={page.data} />
     {/* <PaginationAstrowind prevUrl={page.url.prev} nextUrl={page.url.next} /> */}
     <div class="pagination"><PaginationPhilNash
       page={page}
       urlPattern={getPermalink("/podcast/{}")} 
       firstPageUrl={getPermalink("/podcast/")}
-    /><div> {/* firstPageUrl avoids trailing double slash */}
-
+    /></div> {/* firstPageUrl avoids trailing double slash */}
     <!--
       <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
       <PostTags tags={allTags}  title="Search by Tags:" />
