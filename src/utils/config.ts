@@ -245,18 +245,20 @@ const getAnalytics = () => {
 };
 
 // Define the expected format of the src/categories.yaml file
-export interface Categories {
-  [id: number]: {
-    id: string,
-    title: string,
-    count: number
-  };
-};
+interface Categories extends Array<{
+  id: string,
+  title: string,
+  count: number
+}>{};
+// Alternatively, as a dict:
+// export interface Categories {  [id: number]: {    id: string,    title: string,    count: number  };};
+// then: Object.values(categories).forEach(category => {
+
 // Get an array of the titles of non-empty categories
 const getCategories = () => {
-  const categories = yaml.load(fs.readFileSync('src/categories.yaml', 'utf8')) as Categories;
+  const categories: Categories = yaml.load(fs.readFileSync('src/categories.yaml', 'utf8')) as Categories;
   const categoryTitles: string[] = [];
-  Object.values(categories).forEach(category => {
+  categories.forEach(category => {
     if (category['count']  > 0)
       categoryTitles.push(category['title']);
   });
