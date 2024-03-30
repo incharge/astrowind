@@ -1,6 +1,8 @@
 import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 
 export const headerData = {
+  // \u2315 is the magnifying glass character to indicate search
+  // \u202f is a non-breaking space
   links: [
     {
       text: 'Home',
@@ -15,7 +17,7 @@ export const headerData = {
       href: getBlogPermalink(''),
     },
     {
-      text: '\u2315 Search',
+      text: '\u2315\u202fSearch',
       href: getPermalink('/search'),
     },
   ],

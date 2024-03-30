@@ -90,7 +90,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
       </div>
     </div>
     <nav
-      class="items-center w-full md:w-auto hidden md:flex text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:mx-5 bg-[#d0b0b0] md:bg-transparent"
+      class="items-center w-full md:w-auto hidden md:flex text-default md:mx-5 bg-[#d0b0b0] md:bg-transparent p-0"
       aria-label="Main navigation"
     >
       <ul
@@ -123,7 +123,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
               ) : (
                 <a
                   class:list={[
-                    "hover:text-link dark:hover:text-white px-2 mx-2 my-2 flex items-centers bg-gray-100/10 hover:bg-gray-100/50 rounded",
+                    "hover:text-link dark:hover:text-white px-1 mx-1 my-2 flex items-centers bg-gray-100/10 hover:bg-gray-100/50 rounded",
                     { "aw-link-active": href === currentPath }
                   ]}
                   href={href}
@@ -136,16 +136,18 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
         }
       </ul>
     </nav>
+    {/* Multiplayer control */}
     <div
       class:list={[
         { "ml-auto rtl:ml-0 rtl:mr-auto": position === "left" },
         "hidden md:self-center flex flex-col md:flex md:flex-row items-center md:mb-0 relative w-full md:w-auto md:static justify-end rtl:left-auto rtl:right-0 md:p-0",
       ]}
     >
-      <div class="items-center flex justify-between w-full md:w-auto pl-6 py-2 md:p-0">
+      <div class="items-center flex justify-between w-full md:w-auto pl-6 md:pl-0 py-2 ">
         <MultiplayerAv />
       </div>
-      <div class="items-center flex justify-between w-full md:w-auto pl-4 py-2 md:p-0">
+      {/* Action (support the podcast) */}
+      <div class="items-center flex justify-between w-full md:w-auto pl-4 md:pl-0 py-2">
 {/*
         <div class="flex">
           {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />}
