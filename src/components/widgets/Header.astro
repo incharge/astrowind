@@ -123,7 +123,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
               ) : (
                 <a
                   class:list={[
-                    "hover:text-link dark:hover:text-white px-1 mx-1 my-2 flex items-centers bg-gray-100/10 hover:bg-gray-100/50 rounded",
+                    "hover:text-link dark:hover:text-white px-1 mx-1 lg:mx-2 my-2 flex items-centers bg-gray-100/10 hover:bg-gray-100/50 rounded",
                     { "aw-link-active": href === currentPath }
                   ]}
                   href={href}
@@ -136,13 +136,13 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
         }
       </ul>
     </nav>
-    {/* Multiplayer control */}
     <div
       class:list={[
         { "ml-auto rtl:ml-0 rtl:mr-auto": position === "left" },
         "hidden md:self-center flex flex-col md:flex md:flex-row items-center md:mb-0 relative w-full md:w-auto md:static justify-end rtl:left-auto rtl:right-0 md:p-0",
       ]}
     >
+      {/* Multiplayer control */}
       <div class="items-center flex justify-between w-full md:w-auto pl-6 md:pl-0 py-2 ">
         <MultiplayerAv />
       </div>
