@@ -60,7 +60,7 @@ const categories = CATEGORIES;
     <Tags tags={categories} isCategory={true}></Tags>
     <Headline><span class="capitalize">{category.replaceAll('-', ' ')}</span></Headline>
     { isPagination && (
-      <div class="pagination"><PaginationPhilNash
+      <div class="pagination pb-6"><PaginationPhilNash
         page={page}
         urlPattern={getPermalink(category + '/{}', 'category')} 
         firstPageUrl={getPermalink(category, 'category')}
