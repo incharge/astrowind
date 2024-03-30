@@ -162,10 +162,10 @@ function addVideojs(container, autoplay = false, offset = 0)
 }
 
 function addNoMedia(container, isVideo) {
-    el = document.createElement("div");
+    let el = document.createElement("div");
     el.setAttribute("class", "multiplayernomedia");
     el.innerHTML = "<div style=\"padding: 10px; border-radius: 10px; border-style: solid; background-color: #ff6060; font-size: 1.5em; font-weight: bold; text-align: center;\">There is currently no " + (isVideo ? "video" : "audio") + " version available for this episode</div>";
-    attribute = container.getAttribute("data-poster");
+    let attribute = container.getAttribute("data-poster");
     container.appendChild(el);
 }
 
