@@ -21,10 +21,6 @@ export interface Post {
   /** Optional summary of post content. */
   excerpt?: string;
   
-  /** Added by inCharge */
-  youtubeid?: string;
-  audiourl?: string;
-  
   /**  */
   image?: ImageMetadata | string;
 
@@ -47,6 +43,12 @@ export interface Post {
 
   /**  */
   readingTime?: number;
+
+  // Post fields added by inCharge
+  youtubeid?: string;
+  audiourl?: string;
+  itunesEpisodeUrl?: string;
+  spotifyEpisodeUrl?: string;
 }
 
 export interface MetaData {

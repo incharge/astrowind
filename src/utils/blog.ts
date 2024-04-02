@@ -49,14 +49,17 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     updateDate: rawUpdateDate,
     title,
     excerpt,
-    youtubeid,  /* Added by inCharge */
-    audiourl,   /* Added by inCharge */
     image,
     tags: rawTags = [],
     category: rawCategory,
     author,
     draft = false,
     metadata = {},
+    // Post fields added by inCharge
+    youtubeid,
+    audiourl,
+    itunesEpisodeUrl,
+    spotifyEpisodeUrl,
   } = data;
 
   const slug = cleanSlug(rawSlug); // cleanSlug(rawSlug.split('/').pop());
@@ -75,8 +78,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
 
     title: title,
     excerpt: excerpt,
-    youtubeid: youtubeid, /*Added by inCharge */
-    audiourl: audiourl, /*Added by inCharge */
+
     image: image,
 
     category: category,
@@ -91,6 +93,12 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     // or 'content' in case you consume from API
 
     readingTime: remarkPluginFrontmatter?.readingTime,
+
+    // Post fields added by inCharge
+    youtubeid: youtubeid,
+    audiourl: audiourl,
+    itunesEpisodeUrl: itunesEpisodeUrl,
+    spotifyEpisodeUrl: spotifyEpisodeUrl,
   };
 };
 

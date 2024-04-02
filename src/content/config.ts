@@ -53,8 +53,6 @@ const postCollection = defineCollection({
 
     title: z.string(),
     excerpt: z.string().optional(),
-    youtubeid: z.string().optional(), /* Added by inCharge */
-    audiourl: z.string().optional(), /* Added by inCharge */
     
     image: z.string().optional(),
 
@@ -63,6 +61,12 @@ const postCollection = defineCollection({
     author: z.string().optional(),
 
     metadata: metadataDefinition(),
+
+    // Post fields Added by inCharge
+    youtubeid: z.string().optional(),
+    audiourl: z.string().optional(),
+    itunesEpisodeUrl: z.string().optional(),
+    spotifyEpisodeUrl: z.string().optional(),
   }),
 });
 
