@@ -1,5 +1,5 @@
 src/content/post/*.md
-src/categories.yaml
+src/playlists.yaml
 
 # build output
 dist/

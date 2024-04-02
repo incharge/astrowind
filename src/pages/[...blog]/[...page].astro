@@ -8,7 +8,7 @@ import Headline from '~/components/blog/Headline.astro';
 
 {/* import PaginationAstrowind from '~/components/blog/Pagination.astro'; */}
 import PaginationPhilNash from "@philnash/astro-pagination"; {/* See node_modules/@philnash/astro-pagination */}
-import { SITE, CATEGORIES } from '~/utils/config';
+import { SITE, TAGS } from '~/utils/config';
 import { getPermalink } from '../../utils/permalinks';
 import Tags from '~/components/blog/Tags.astro';
 
@@ -50,12 +50,11 @@ if (page.url.next && !page.url.next.startsWith('/' + SITE.base))
   page.url.next = getPermalink(page.url.next);
 // Show pagination if there's more than one page
 const isPagination = page.lastPage > 1;
-const categories = CATEGORIES;
 ---
 
 <Layout metadata={metadata}>
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
-    <Tags tags={CATEGORIES} isCategory={true}></Tags>
+    <Tags tags={TAGS} isCategory={false}></Tags>
     <Headline>All Episodes</Headline>
     <div class="pagination pb-6"><PaginationPhilNash
       page={page}

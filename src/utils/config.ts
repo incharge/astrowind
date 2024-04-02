@@ -244,27 +244,30 @@ const getAnalytics = () => {
   return merge({}, _default, config?.analytics ?? {}) as AnalyticsConfig;
 };
 
-// Define the expected format of the src/categories.yaml file
-interface Categories extends Array<{
+// Define the expected format of the src/playlists.yaml file
+interface Tags extends Array<{
   id: string,
   title: string,
   count: number
 }>{};
 // Alternatively, as a dict:
-// export interface Categories {  [id: number]: {    id: string,    title: string,    count: number  };};
-// then: Object.values(categories).forEach(category => {
+// export interface Tags {  [id: number]: {    id: string,    title: string,    count: number  };};
+// then: Object.values(categories).forEach(tags => {
 
-// Get an array of the titles of non-empty categories
-const getCategories = () => {
-  const categories: Categories = yaml.load(fs.readFileSync('src/categories.yaml', 'utf8')) as Categories;
-  const categoryTitles: string[] = [];
-  categories.forEach(category => {
-    if (category['count']  > 0)
-      categoryTitles.push(category['title']);
+// Get an array of the titles of non-empty tags
+const getTags = () => {
+  const tags: Tags = yaml.load(fs.readFileSync('src/playlists.yaml', 'utf8')) as Tags;
+  const tagsTitles: string[] = [];
+  tags.forEach(tag => {
+    const tagName = tag['title'];
+    if ( !tagsTitles.includes(tagName) )
+      tagsTitles.push(tagName);
   });
-  return categoryTitles;
+  tagsTitles.sort();
+  return tagsTitles;
 };
-export const CATEGORIES = getCategories();
+export const TAGS = getTags();
+export const CATEGORIES = [];
 
 export const SITE = getSite();
 export const I18N = getI18N();
