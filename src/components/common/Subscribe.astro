@@ -1,13 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import { listenData } from '~/navigation';
+import { type PodcastPlatforms } from '~/utils/config.ts';
 const images = import.meta.glob("../../assets/images/listen/*");
 const height = 64;
 
+export interface Props {
+  podcastPlatforms: PodcastPlatforms;
+}
+const { podcastPlatforms, ...attrs } = Astro.props;
 ---
-<div class="overflow-x-auto">
-  <ul class="flex flex-row list-none p-0">
-{listenData.map((listen) =>
+<div {...attrs}>
+  <ul class="flex flex-row list-none p-0 m-0">
+{podcastPlatforms.map((listen) =>
   images[`../../assets/images/listen/${listen.image}.svg`] ? (
     <li class="p-0 m-0 pr-3">
       <a href={listen.url} title={(listen.action || 'Listen') + ' on ' + listen.text}>

@@ -3,9 +3,10 @@ title: 'Subscribe'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 import Subscribe from "~/components/common/Subscribe.astro"
+import { podcastPlatforms } from '~/utils/config.ts';
 
-Subscribe to The Dissenter on YouTube or podcast to not miss new in-depth interviews with leading academics and rising stars in Psychology, Philosophy, Anthropology, Neuroscience, Economics, Biology, and more.
-<Subscribe />
+Subscribe to The Dissenter on YouTube or your favourite podcast app. Don't miss new in-depth interviews with leading academics and rising stars in Psychology, Philosophy, Anthropology, Neuroscience, Economics, Biology, and more.
+<Subscribe podcastPlatforms={podcastPlatforms} />
 
 Follow the show on Twitter: https://twitter.com/TheDissenterYT  
 Follow the show on Facebook: https://www.facebook.com/thedissenteryt/
