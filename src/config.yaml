@@ -10,8 +10,8 @@ site:
 
 # Re-use robot index settings using yaml &anchor (here) and *alias (below)
 defaults: &robotsdefault
-    index  : false
-    follow : false
+    index  : true
+    follow : true
 
 # Default SEO metadata
 metadata:
