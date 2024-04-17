@@ -1,7 +1,7 @@
 # Changes do not take effect until the astro server (npm run dev) is restarted 
 # if NODE_ENV is 'development' then site and base are overridden by VITE_SITE and VITE_BASE (See config.ts)
 site:
-  name: The Dissenter
+  name: The Dissenter Podcast - Official
   site: 'https://www.thedissenter.net/'
   base: '/'
   trailingSlash: true
@@ -16,12 +16,12 @@ defaults: &robotsdefault
 # Default SEO metadata
 metadata:
   title:
-    default: The Dissenter
-    template: '%s — The Dissenter Podcast'
+    default: The Dissenter Podcast - Official
+    template: '%s — The Dissenter Podcast - Official'
   description: "My name is Ricardo Lopes, and I'm from Portugal. Thank you for visiting my podcast. Over the past few years, I have conducted and released more than 800 interviews and talks with experts and academics from a variety of areas and disciplines, ranging from the Arts and Philosophy to the Social Sciences and Biology. You will certainly find a subject of your interest covered here. New interviews are released on Mondays, Thursdays, and Fridays."
   robots: *robotsdefault
   openGraph:
-    site_name: The Dissenter
+    site_name: The Dissenter Podcast
     images:
       - url: '~/assets/images/thedissenter-opengraph-1200x630.jpg'
         width: 1200
