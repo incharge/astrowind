@@ -26,7 +26,7 @@ export const headerData = {
 
 export const footerData = {
   socialLinks: [
-    { text: 'Email', href: "mailto:dissenteryt@gmail.com", icon: "tabler:mail" },
+    { text: 'Email', href: "mailto:thedissenteryt@gmail.com", icon: "tabler:mail" },
     { text: 'Twitter', href: "https://twitter.com/TheDissenterYT", icon: "tabler:brand-x" },
     { text: 'Facebook', href: "https://www.facebook.com/thedissenteryt/", icon: "tabler:brand-facebook" },
   ],
