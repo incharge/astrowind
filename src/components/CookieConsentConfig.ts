@@ -42,7 +42,7 @@ export const config: CookieConsentConfig = {
           showPreferencesBtn: 'Manage preferences',
           footer:
           '<a href="/cookies/">Cookie Policy</a>',
-          closeIconLabel: 'x',
+          // closeIconLabel: 'X', Don't show unless inaccessible button size is increased to 48px
         },
         preferencesModal: {
           title: 'Consent Preferences Center',
