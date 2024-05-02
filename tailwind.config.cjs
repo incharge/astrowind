@@ -16,6 +16,9 @@ module.exports = {
         serif: ['var(--aw-font-serif)', ...defaultTheme.fontFamily.serif],
         heading: ['var(--aw-font-heading)', ...defaultTheme.fontFamily.sans],
       },
+      aspectRatio: {
+        'youtube': '1.8 / 1',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
