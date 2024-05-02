@@ -102,6 +102,7 @@ async function addYoutube(container, autoplay = false, offset = 0)
 
     // Don't check if there'a already an element because it may be in the process of being destroyed
     let ytElement = document.createElement("lite-youtube");
+    ytElement.setAttribute("style", "background-image: url(\"" + container.getAttribute("data-poster") ) + "\")";
     ytElement.setAttribute("class", container.getAttribute("class"));
     ytElement.classList.remove("multiplayer");
     ytElement.setAttribute("videoid", youtubeid);
