@@ -21,6 +21,7 @@ export interface Props extends astroHTML.JSX.HTMLAttributes {
 const { youtubeid, audiourl, poster, ...attrs } = Astro.props as Props;
 attrs["class"] = (attrs["class"] ? attrs["class"] + " " : "") + "multiplayer";
 const smallposter = poster?.replace(new RegExp('maxresdefault.jpg$'), "mqdefault.jpg");
-const style="background-image: url(\"" + smallposter + "\"); background-size: contain;";
+// Pre-load the image? No, doesn't speed up. Maybe because YouTube in an iframe doesn't use cached image?
+// const style="background-image: url(\"" + smallposter + "\"); background-size: contain;";
 ---
-<div style={style} {...attrs} data-youtubeid={youtubeid} data-audiourl={audiourl} data-poster={smallposter} />
+<div {...attrs} data-youtubeid={youtubeid} data-audiourl={audiourl} data-poster={smallposter} />
