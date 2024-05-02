@@ -20,5 +20,6 @@ export interface Props extends astroHTML.JSX.HTMLAttributes {
 
 const { youtubeid, audiourl, poster, ...attrs } = Astro.props as Props;
 attrs["class"] = (attrs["class"] ? attrs["class"] + " " : "") + "multiplayer";
+const style="background-image: url(\"" + poster + "\"); background-size: contain;";
 ---
-<div {...attrs} data-youtubeid={youtubeid} data-audiourl={audiourl} data-poster={poster}></div>
+<div style={style} {...attrs} data-youtubeid={youtubeid} data-audiourl={audiourl} data-poster={poster} />
