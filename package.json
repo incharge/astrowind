@@ -18,7 +18,7 @@
     "@astrojs/sitemap": "^3.0.3",
     "@astrolib/analytics": "^0.4.2",
     "@astrolib/seo": "^1.0.0-beta.4",
-    "@fontsource-variable/inter": "^5.0.15",
+    "@fontsource-variable/open-sans": "^5.0.29",
     "@philnash/astro-pagination": "^0.3.0",
     "astro": "^3.6.4",
     "astro-icon": "^1.0.0-next.2",
