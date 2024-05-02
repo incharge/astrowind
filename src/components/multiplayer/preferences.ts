@@ -8,6 +8,9 @@ const safeRun = (fn) => {
 };
 
 class Preferences {
+    isConsent: boolean;
+    isVideo: boolean;
+
     constructor() {
         this.isConsent = false;
         this.isVideo = true;

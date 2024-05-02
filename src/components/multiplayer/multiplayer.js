@@ -1,4 +1,4 @@
-import { preferences } from "./preferences.js"
+import { preferences } from "./preferences"
 
 export function init() {
     const isVideo = preferences.isVideo;
