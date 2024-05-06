@@ -1,5 +1,6 @@
 src/content/post/*.md
 src/playlists.yaml
+public/transcript/*.vtt
 
 # build output
 dist/

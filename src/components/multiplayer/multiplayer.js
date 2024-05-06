@@ -143,8 +143,20 @@ function addVideojs(container, autoplay = false, offset = 0)
     let source = document.createElement('source');
     source.setAttribute("src", audiourl);
     source.setAttribute("type", "audio/mp4");
-    vjElement.setAttribute("poster", container.getAttribute("data-poster"));
     vjElement.appendChild(source);
+
+    let transcripturl = container.getAttribute("data-transcripturl");
+    if (transcripturl) {
+        const track = document.createElement('track');
+        track.setAttribute("src", transcripturl);
+        track.setAttribute("kind", "captions");
+        track.setAttribute("srclang", "en");
+        track.setAttribute("label", "English");
+        track.setAttribute("default", "true");
+        vjElement.appendChild(track);
+    }
+
+    vjElement.setAttribute("poster", container.getAttribute("data-poster"));
 
     let vjPlayer = videojs(
         vjElement,

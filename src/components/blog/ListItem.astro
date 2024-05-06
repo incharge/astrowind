@@ -25,7 +25,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
 ---
 
 <article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
-  <MultiPlayer class="aspect-youtube bg-gray-600" youtubeid={post.youtubeid} audiourl={post.audiourl} poster={post.image}/>
+  <MultiPlayer class="aspect-youtube bg-gray-600" youtubeid={post.youtubeid} audiourl={post.audiourl} poster={post.image} transcript={post.transcript}/>
   <div class="mt-0">
     <header>
 {/*   <div class="mb-1">

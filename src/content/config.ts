@@ -67,6 +67,7 @@ const postCollection = defineCollection({
     audiourl: z.string().optional(),
     itunesEpisodeUrl: z.string().optional(),
     spotifyEpisodeUrl: z.string().optional(),
+    transcript: z.string().optional(),
   }),
 });
 

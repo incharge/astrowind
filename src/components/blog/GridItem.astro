@@ -19,7 +19,7 @@ const image = (await findImage(post.image));
 ---
 
 <article class="mb-6 transition">
-  <MultiPlayer class="aspect-youtube bg-gray-600" youtubeid={post.youtubeid} audiourl={post.audiourl} poster={post.image}/>
+  <MultiPlayer class="aspect-youtube bg-gray-600" youtubeid={post.youtubeid} audiourl={post.audiourl} poster={post.image} transcript={post.transcript}/>
   <h3 class="py-1 my-1 text-xl font-bold leading-tight sm:text-2xl font-heading">
     {
       !APP_BLOG?.post?.isEnabled ? (

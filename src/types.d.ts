@@ -49,6 +49,7 @@ export interface Post {
   audiourl?: string;
   itunesEpisodeUrl?: string;
   spotifyEpisodeUrl?: string;
+  transcript?: string;
 }
 
 export interface MetaData {
