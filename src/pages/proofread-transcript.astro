@@ -1,0 +1,29 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Proofread transcript',
+};
+---
+<script>import "../components/proofread-transcript/demo"</script>
+
+<script>import 'lite-youtube-embed';</script>
+
+<Layout metadata={metadata}>
+    <section class="flex items-center h-full p-16">
+        <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+            <div class="max-w-md text-center">
+                <div id="pt-parent">
+                  <div>
+                    URL:
+                    <input type="text" id="pt-transcript-url" value=""/>
+                    <button id="pt-load">Load transcript</button>
+                  </div>
+                  <audio id="pt-audio" controls src=""></audio>
+                  <div id="pt-speaker"><!-- The container for the name of the current speaker --></div>
+                  <div id="pt-line"><!-- The container for the transcript --></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

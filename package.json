@@ -26,6 +26,7 @@
     "limax": "4.1.0",
     "lite-youtube-embed": "^0.3.2",
     "lodash.merge": "^4.6.2",
+    "proofread-transcript": "^0.0.2-alpha.4",
     "typescript-esbuild": "^0.3.1",
     "unpic": "^3.14.1",
     "vanilla-cookieconsent": "^3.0.0",
