@@ -4,10 +4,10 @@
                 "Ricardo Lopes",
                 "Dr. Stephanie Hare"
         ],
-        "monologues": [
+        "lines": [
                 {
                         "speaker": 0,
-                        "items": [
+                        "words": [
                                 {
                                         "type": "pronunciation",
                                         "alternatives": [
@@ -897,7 +897,7 @@
                 },
                 {
                         "speaker": 1,
-                        "items": [
+                        "words": [
                                 {
                                         "type": "pronunciation",
                                         "alternatives": [
@@ -1010,7 +1010,7 @@
                 },
                 {
                         "speaker": 0,
-                        "items": [
+                        "words": [
                                 {
                                         "type": "pronunciation",
                                         "alternatives": [
@@ -1840,7 +1840,7 @@
                 },
                 {
                         "speaker": 1,
-                        "items": [
+                        "words": [
                                 {
                                         "type": "pronunciation",
                                         "alternatives": [
@@ -14157,7 +14157,7 @@
                 },
                 {
                         "speaker": 0,
-                        "items": [
+                        "words": [
                                 {
                                         "type": "pronunciation",
                                         "alternatives": [
@@ -15165,7 +15165,7 @@
                 },
                 {
                         "speaker": 1,
-                        "items": [
+                        "words": [
                                 {
                                         "type": "pronunciation",
                                         "alternatives": [
