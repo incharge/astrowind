@@ -56,11 +56,13 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     draft = false,
     metadata = {},
     // Post fields added by inCharge
+    episodeid,
     youtubeid,
     audiourl,
     itunesEpisodeUrl,
     spotifyEpisodeUrl,
     transcript,
+    vtt
   } = data;
 
   const slug = cleanSlug(rawSlug); // cleanSlug(rawSlug.split('/').pop());
@@ -96,11 +98,13 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     readingTime: remarkPluginFrontmatter?.readingTime,
 
     // Post fields added by inCharge
+    episodeid: episodeid,
     youtubeid: youtubeid,
     audiourl: audiourl,
     itunesEpisodeUrl: itunesEpisodeUrl,
     spotifyEpisodeUrl: spotifyEpisodeUrl,
     transcript: transcript,
+    vtt: vtt,
   };
 };
 

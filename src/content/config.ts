@@ -63,11 +63,13 @@ const postCollection = defineCollection({
     metadata: metadataDefinition(),
 
     // Post fields Added by inCharge
+    episodeid: z.string(),
     youtubeid: z.string().optional(),
     audiourl: z.string().optional(),
     itunesEpisodeUrl: z.string().optional(),
     spotifyEpisodeUrl: z.string().optional(),
     transcript: z.string().optional(),
+    vtt: z.string().optional(),  
   }),
 });
 

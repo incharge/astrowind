@@ -145,10 +145,10 @@ function addVideojs(container, autoplay = false, offset = 0)
     source.setAttribute("type", "audio/mp4");
     vjElement.appendChild(source);
 
-    let transcripturl = container.getAttribute("data-transcripturl");
-    if (transcripturl) {
+    let captions = container.getAttribute("data-captions");
+    if (captions) {
         const track = document.createElement('track');
-        track.setAttribute("src", transcripturl);
+        track.setAttribute("src", captions);
         track.setAttribute("kind", "captions");
         track.setAttribute("srclang", "en");
         track.setAttribute("label", "English");

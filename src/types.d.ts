@@ -45,11 +45,13 @@ export interface Post {
   readingTime?: number;
 
   // Post fields added by inCharge
+  episodeid: string;
   youtubeid?: string;
   audiourl?: string;
   itunesEpisodeUrl?: string;
   spotifyEpisodeUrl?: string;
   transcript?: string;
+  vtt?: string;
 }
 
 export interface MetaData {

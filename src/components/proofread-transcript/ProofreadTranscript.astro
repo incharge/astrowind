@@ -1,0 +1,15 @@
+---
+import './proofread-tailwind.pcss';
+---
+<script>
+import { ProofreadDom } from '@incharge/transcript-proofreader';
+const proofreadDom = new ProofreadDom();
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+proofreadDom.attach(urlParams.get("url"));
+</script>
+    <input type="text" id="ic-transcript-url" class="ic-edit" value="../transcript/924.ic.json"/>&nbsp;<button id="ic-load" class="ic-button">Load transcript</button><br/>
+    <button id="ic-prev-line" class="ic-button">Previous line</button>&nbsp;<select id="ic-select-line" class="ic-select"><option>Current line...</option>&nbsp;</select><button id="ic-next-line" class="ic-button">Next line</button>
+    <audio id="ic-audio" style="width: 100%" controls src=""></audio>
+    <div id="ic-speaker"><!-- The container for the name of the current speaker --></div>
+    <div id="ic-line"><!-- The container for the transcript --></div>

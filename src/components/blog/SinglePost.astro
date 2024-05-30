@@ -1,12 +1,15 @@
 ---
 import MultiPlayer from '~/components/multiplayer/MultiPlayer.astro';
 import { Icon } from 'astro-icon/components';
+import { icStringToTextLines, type TranscriptTextLine } from "@incharge/transcript-core"
+// See https://docs.astro.build/en/guides/imports/#node-builtins
+import fs from 'node:fs/promises';
 
-import Image from '~/components/common/Image.astro';
-import PostTags from '~/components/blog/Tags.astro';
+// import Image from '~/components/common/Image.astro';
+// import PostTags from '~/components/blog/Tags.astro';
 import SocialShare from '~/components/common/SocialShare.astro';
 
-import { getPermalink } from '~/utils/permalinks';
+//import { getPermalink } from '~/utils/permalinks';
 import { getFormattedDate } from '~/utils/utils';
 
 import type { Post } from '~/types';
@@ -18,6 +21,23 @@ export interface Props {
 
 const { post, url } = Astro.props;
 const { Content } = post;
+interface CustomDataFile {
+  default: Record<string, any>;
+}
+
+// If there's a transcript for this episode, convert it to an array of TranscriptTextLine
+let lines: Array<TranscriptTextLine> | Error = [];
+// No! Astro.glob only accepts literal parameters, not variables
+// const transcripts = await Astro.glob<TranscriptSchema>('../../../public/transcript/924.ic.json');
+try {
+  const transcriptUrl = new URL('../../../public/transcript/' + post.episodeid + '.ic.json', import.meta.url);
+  if (async (transcriptUrl) => !!(await fs.stat(transcriptUrl).catch(e => false))) {
+    const transcript: string = await fs.readFile(transcriptUrl, 'utf-8');
+    lines = icStringToTextLines(transcript);
+  }
+} catch (e)  {
+  // Failed to read transcript file
+}
 ---
 
 <section class="mx-auto">
@@ -79,17 +99,47 @@ const { Content } = post;
       }
 */}
     </header>
-    <MultiPlayer class="mx-auto max-w-2xl aspect-youtube bg-gray-600" youtubeid={post.youtubeid} audiourl={post.audiourl} poster={post.image} transcript={post.transcript}/>
+    <MultiPlayer class="mx-auto max-w-2xl aspect-youtube bg-gray-600" youtubeid={post.youtubeid} audiourl={post.audiourl} poster={post.image} vtt={post.vtt}/>
     <div
       class="mx-auto px-6 sm:px-6 max-w-3xl prose prose-lg lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8 prose-headings:scroll-mt-[80px]"
       >
       {
-        Content ? (
-          <Content />
-        ) : (
-          <Fragment set:html={post.content || ""} />
-        )
-      }
+      !(lines instanceof Error) && lines.length ? (
+        <a id="top"></a><a href="#transcript">Jump to transcript</a>
+        <h2>Show notes</h2>
+        <div class="timelinks">
+        {
+          Content ? (
+            <Content />
+          ) : (
+            <Fragment set:html={post.content || ""} />
+          )
+        }
+        </div>
+        <a href="#top">Back to top</a>
+        <a id="transcript"></a>
+        <h2>Transcript</h2>
+        <div class="timelinks">
+          <p class="text-muted text-sm bg-slate-200 rounded p-1 text-center\">Transcripts are automatically generated and may contain errors</p>
+          {lines.map(line => (
+            <div><time>{line.start_time}</time> {line.speaker}  {line.words}</div>
+          ))}
+        </div>
+      ) :
+      (
+        <div class="timelinks">
+            <h1>NO TRANSCRIPT</h1>
+            <p>lines1={lines}</p>
+        {
+          Content ? (
+            <Content />
+          ) : (
+            <Fragment set:html={post.content || ""} />
+          )
+        }
+        </div>
+      )
+    }
     </div>
   </article>
 </section>

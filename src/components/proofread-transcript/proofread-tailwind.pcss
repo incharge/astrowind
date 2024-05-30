@@ -1,0 +1,16 @@
+/* Use tailwind to style the proofreader form elements */
+.ic-form-element {
+    @apply border py-1 px-2 shadow rounded focus:outline-none;
+}
+.ic-button {
+    @apply ic-form-element bg-blue-500 hover:bg-blue-700 text-white font-bold;
+}
+.ic-input {
+    @apply ic-form-element shadow appearance-none text-gray-700 leading-tight;
+}
+.ic-edit {
+    @apply ic-input;
+}
+.ic-select {
+    @apply ic-input;
+}
