@@ -25,15 +25,25 @@ interface CustomDataFile {
   default: Record<string, any>;
 }
 
-// If there's a transcript for this episode, convert it to an array of TranscriptTextLine
+// Get the transcript, if there is one for this episode
 let lines: Array<TranscriptTextLine> | Error = [];
+
+// No! Store the stringified transcript object in the .md file
+// if (post.transcript) {
+//   lines = JSON.parse(post.transcript);
+// }
+
 // No! Astro.glob only accepts literal parameters, not variables
 // const transcripts = await Astro.glob<TranscriptSchema>('../../../public/transcript/924.ic.json');
+
+// In build mode, the base url is dist/chunks/prerender_9abcdef0.mjs ,
+// one level higher than src/components/blog/SinglePost.astro
+const root = import.meta.url.includes('/dist/') ? '../..' : '../../..';
+const transcriptUrl = new URL(root + '/public/transcript/' + post.transcript, import.meta.url);
 try {
-  const transcriptUrl = new URL('../../../public/transcript/' + post.episodeid + '.ic.json', import.meta.url);
   if (async (transcriptUrl) => !!(await fs.stat(transcriptUrl).catch(e => false))) {
-    const transcript: string = await fs.readFile(transcriptUrl, 'utf-8');
-    lines = icStringToTextLines(transcript);
+    // lines = icStringToTextLines(transcript);
+    lines = JSON.parse(await fs.readFile(transcriptUrl, 'utf-8'));
   }
 } catch (e)  {
   // Failed to read transcript file
@@ -128,8 +138,6 @@ try {
       ) :
       (
         <div class="timelinks">
-            <h1>NO TRANSCRIPT</h1>
-            <p>lines1={lines}</p>
         {
           Content ? (
             <Content />
