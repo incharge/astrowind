@@ -9,6 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "link": "npm link @incharge/transcript-core @incharge/transcript-proofreader",
     "format": "prettier -w .",
     "lint:eslint": "eslint . --ext .js,.ts,.astro"
   },
@@ -19,6 +20,7 @@
     "@astrolib/analytics": "^0.4.2",
     "@astrolib/seo": "^1.0.0-beta.4",
     "@fontsource-variable/open-sans": "^5.0.29",
+    "@incharge/transcript-proofreader": "^0.0.4-alpha.8",
     "@philnash/astro-pagination": "^0.3.0",
     "astro": "^3.6.4",
     "astro-icon": "^1.0.0-next.2",
@@ -26,7 +28,6 @@
     "limax": "4.1.0",
     "lite-youtube-embed": "^0.3.2",
     "lodash.merge": "^4.6.2",
-    "proofread-transcript": "^0.0.2-alpha.4",
     "typescript-esbuild": "^0.3.1",
     "unpic": "^3.14.1",
     "vanilla-cookieconsent": "^3.0.0",
