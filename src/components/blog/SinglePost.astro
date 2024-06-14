@@ -39,11 +39,13 @@ let lines: Array<TranscriptTextLine> | Error = [];
 // In build mode, the base url is dist/chunks/prerender_9abcdef0.mjs ,
 // one level higher than src/components/blog/SinglePost.astro
 const root = import.meta.url.includes('/dist/') ? '../..' : '../../..';
-const transcriptUrl = new URL(root + '/public/transcript/' + post.transcript, import.meta.url);
+const linesUrl = new URL(root + '/public/transcript/' + post.transcript, import.meta.url);
+let transcriptUrl: string = '';
 try {
-  if (async (transcriptUrl) => !!(await fs.stat(transcriptUrl).catch(e => false))) {
+  if (async (linesUrl) => !!(await fs.stat(linesUrl).catch(e => false))) {
     // lines = icStringToTextLines(transcript);
-    lines = JSON.parse(await fs.readFile(transcriptUrl, 'utf-8'));
+    lines = JSON.parse(await fs.readFile(linesUrl, 'utf-8'));
+    transcriptUrl = `${Astro.url.origin}${import.meta.env.BASE_URL}proofreader/?url=https://raw.githubusercontent.com/thedissenter/thedissenter/main/episode/${post.episodeid}/transcript.ic.json`;
   }
 } catch (e)  {
   // Failed to read transcript file
@@ -132,8 +134,10 @@ try {
         <div class="timelinks">
           <p class="text-muted text-sm bg-slate-200 rounded p-1 text-center\">Transcripts are automatically generated and may contain errors</p>
           {lines.map(line => (
-            <div><time>{line.start_time}</time> {line.speaker}  {line.words}</div>
+            <div><time>{line.start_time}</time> {line.speaker}:  {line.words}</div>
           ))}
+        <a href="#top">Back to top</a>
+        <p><a href={transcriptUrl}>Proof read the transcript (experimental)</a></p>
         </div>
       ) :
       (
