@@ -91,4 +91,8 @@ export default defineConfig({
       },
     },
   },
+
+  redirects: {
+    '/podcast/964-steve-keen-rebuilding-economics-from-the-top-down/': '/podcast/964-steve-keen-profstevekeen-rebuilding-economics-from-the-top-down/'
+  },
 });
