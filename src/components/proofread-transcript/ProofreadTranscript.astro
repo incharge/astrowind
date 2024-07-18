@@ -8,8 +8,24 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 proofreadDom.attach(urlParams.get("url"));
 </script>
-    <input type="text" id="ic-transcript-url" class="ic-edit" value="../transcript/924.ic.json"/>&nbsp;<button id="ic-load" class="ic-button">Load transcript</button><br/>
-    <button id="ic-prev-line" class="ic-button">Previous line</button>&nbsp;<select id="ic-select-line" class="ic-select"><option>Current line...</option>&nbsp;</select><button id="ic-next-line" class="ic-button">Next line</button>
+    <input type="text" id="ic-transcript-url" class="ic-edit" />
+        &nbsp;<button id="ic-load-url" class="ic-button">Load from URL</button>
+        &nbsp;<button id="ic-load-local" class="ic-button">Load from local storage</button>
+        &nbsp;<button id="ic-load-file" class="ic-button">Load from file</button>
+        &nbsp;<button id="ic-download" class="ic-button">Download</button>
+        <input id="ic-upload-file" type="file" hidden>
+        <br/>
+    <!-- <input type="edit" id="ic-offset" class="ic-edit"/>&nbsp;<button id="ic-skip-to-offset" class="ic-button">Skip to (seconds)</button><br/> -->
+    <button id="ic-rw-btn" data-seconds="-5" class="ic-button">-5s</button>
+        <button id="ic-prev-line" class="ic-button">Previous line</button>
+        <select id="ic-select-line" class="ic-select"><option>Current line...</option>&nbsp;</select>
+        <button id="ic-next-line" class="ic-button">Next line</button>
+        <button id="ic-ff-btn" data-seconds="15" class="ic-button">+15s</button>
+        <br/>
     <audio id="ic-audio" style="width: 100%" controls src=""></audio>
-    <!-- <div id="ic-speaker"> The container for the name of the current speaker </div> -->
+    <!--<div id="ic-speaker"> The container for the name of the current speaker</div>-->
+    <input type="text" id="ic-edit-word" class="ic-edit"/>
+        &nbsp;<button id="ic-save" class="ic-button">Save</button>
+        <button id="ic-cancel" class="ic-button">Cancel</button>
+        <br/>    
     <div id="ic-line"><!-- The container for the transcript --></div>
